@@ -8,7 +8,7 @@ type AppScreenProps = {
 
 function App({title, genre, year}: AppScreenProps): JSX.Element {
   return (
-    <FirstScreen title={title} genre={genre} year={year} />
+    <FirstScreen title={ title } genre={ genre } year={ year } />
   );
 }
 

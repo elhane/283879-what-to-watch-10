@@ -1,6 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import App from './components/app/app';
+import SvgSprite from './components/svg-sprite/svg-sprite';
 
 const FilmInfo = {
   TITLE: 'The Grand Budapest Hotel',
@@ -14,6 +15,7 @@ const root = ReactDOM.createRoot(
 
 root.render(
   <React.StrictMode>
-    <App title={FilmInfo.TITLE} genre={FilmInfo.GENRE} year={FilmInfo.YEAR} />
+    <SvgSprite />
+    <App title={ FilmInfo.TITLE } genre={ FilmInfo.GENRE } year={ FilmInfo.YEAR } />
   </React.StrictMode>,
 );
