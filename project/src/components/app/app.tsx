@@ -1,4 +1,4 @@
-import FirstScreen from '../../pages/first-screen/first-screen';
+import FirstScreen from '../pages/first-screen/first-screen';
 
 type AppScreenProps = {
   title: string,

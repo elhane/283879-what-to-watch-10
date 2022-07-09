@@ -1,5 +1,5 @@
-import Footer from '../../components/footer/footer';
-import Header from '../../components/header/header';
+import Footer from '../../footer/footer';
+import Header from '../../header/header';
 
 function AuthScreen(): JSX.Element {
   return (

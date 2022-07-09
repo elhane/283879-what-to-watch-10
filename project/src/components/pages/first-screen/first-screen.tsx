@@ -1,6 +1,6 @@
-import FilmCard from '../../components/film-card/film-card';
-import Footer from '../../components/footer/footer';
-import Header from '../../components/header/header';
+import FilmCard from '../../film-card/film-card';
+import Footer from '../../footer/footer';
+import Header from '../../header/header';
 
 type FirstScreenProps = {
   title: string,
