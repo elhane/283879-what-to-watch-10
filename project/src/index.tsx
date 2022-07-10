@@ -1,6 +1,13 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import App from './components/app/app';
+import SvgSprite from './components/svg-sprite/svg-sprite';
+
+const FilmInfo = {
+  TITLE: 'The Grand Budapest Hotel',
+  GENRE: 'Drama',
+  YEAR: 2014
+};
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement,
@@ -8,6 +15,7 @@ const root = ReactDOM.createRoot(
 
 root.render(
   <React.StrictMode>
-    <App />
+    <SvgSprite />
+    <App title={ FilmInfo.TITLE } genre={ FilmInfo.GENRE } year={ FilmInfo.YEAR } />
   </React.StrictMode>,
 );
