@@ -2,7 +2,7 @@ export enum AppRoute {
   Root = '/',
   Login = '/login',
   FilmsList = '/mylist',
-  Film = '/films/:id',
+  Films = '/films/',
   AddReview = '/films/:id/review',
   Player = '/player/:id'
 }

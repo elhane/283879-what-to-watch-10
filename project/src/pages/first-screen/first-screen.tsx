@@ -1,14 +1,28 @@
-import FilmCard from '../../film-card/film-card';
-import Footer from '../../footer/footer';
-import Header from '../../header/header';
+import FilmsList from '../../components/films-list/films-list';
+import { Films } from '../../types/films';
+import Footer from '../../components/footer/footer';
+import Header from '../../components/header/header';
+import { useNavigate } from 'react-router-dom';
 
 type FirstScreenProps = {
   title: string,
   genre: string,
-  year: number
+  year: number,
+  films: Films
 }
 
-function FirstScreen({ title, genre, year }: FirstScreenProps): JSX.Element {
+function FirstScreen({ title, genre, year, films }: FirstScreenProps): JSX.Element {
+
+  const navigate = useNavigate();
+
+  const onPlayBtnClickHandler = () => {
+    navigate('/player/1');
+  };
+
+  const onMyListBtnClickHandler = () => {
+    //callback для добавления фильма в список?
+  };
+
   return (
     <>
       <section className="film-card">
@@ -34,17 +48,17 @@ function FirstScreen({ title, genre, year }: FirstScreenProps): JSX.Element {
               </p>
 
               <div className="film-card__buttons">
-                <button className="btn btn--play film-card__button" type="button">
+                <button className="btn btn--play film-card__button" type="button" onClick={ onPlayBtnClickHandler }>
                   <svg viewBox="0 0 19 19" width="19" height="19">
                     <use xlinkHref="#play-s"></use>
                   </svg>
                   <span>Play</span>
                 </button>
-                <button className="btn btn--list film-card__button" type="button">
+                <button className="btn btn--list film-card__button" type="button" onClick={ onMyListBtnClickHandler }>
                   <svg viewBox="0 0 19 20" width="19" height="20">
                     <use xlinkHref="#add"></use>
                   </svg>
-                  <span>My list</span> <span className="film-card__count">9</span>
+                  <span>My list</span> <span className="film-card__count">{ films.length }</span>
                 </button>
               </div>
             </div>
@@ -58,44 +72,38 @@ function FirstScreen({ title, genre, year }: FirstScreenProps): JSX.Element {
 
           <ul className="catalog__genres-list">
             <li className="catalog__genres-item catalog__genres-item--active">
-              <a href="#" className="catalog__genres-link">All genres</a>
+              <a href="src/pages/first-screen/first-screen#" className="catalog__genres-link">All genres</a>
             </li>
             <li className="catalog__genres-item">
-              <a href="#" className="catalog__genres-link">Comedies</a>
+              <a href="src/pages/first-screen/first-screen#" className="catalog__genres-link">Comedies</a>
             </li>
             <li className="catalog__genres-item">
-              <a href="#" className="catalog__genres-link">Crime</a>
+              <a href="src/pages/first-screen/first-screen#" className="catalog__genres-link">Crime</a>
             </li>
             <li className="catalog__genres-item">
-              <a href="#" className="catalog__genres-link">Documentary</a>
+              <a href="src/pages/first-screen/first-screen#" className="catalog__genres-link">Documentary</a>
             </li>
             <li className="catalog__genres-item">
-              <a href="#" className="catalog__genres-link">Dramas</a>
+              <a href="src/pages/first-screen/first-screen#" className="catalog__genres-link">Dramas</a>
             </li>
             <li className="catalog__genres-item">
-              <a href="#" className="catalog__genres-link">Horror</a>
+              <a href="src/pages/first-screen/first-screen#" className="catalog__genres-link">Horror</a>
             </li>
             <li className="catalog__genres-item">
-              <a href="#" className="catalog__genres-link">Kids & Family</a>
+              <a href="src/pages/first-screen/first-screen#" className="catalog__genres-link">Kids & Family</a>
             </li>
             <li className="catalog__genres-item">
-              <a href="#" className="catalog__genres-link">Romance</a>
+              <a href="src/pages/first-screen/first-screen#" className="catalog__genres-link">Romance</a>
             </li>
             <li className="catalog__genres-item">
-              <a href="#" className="catalog__genres-link">Sci-Fi</a>
+              <a href="src/pages/first-screen/first-screen#" className="catalog__genres-link">Sci-Fi</a>
             </li>
             <li className="catalog__genres-item">
-              <a href="#" className="catalog__genres-link">Thrillers</a>
+              <a href="src/pages/first-screen/first-screen#" className="catalog__genres-link">Thrillers</a>
             </li>
           </ul>
 
-          <div className="catalog__films-list">
-            {
-              <>
-                { [...Array(20)].map((index) => <FilmCard key={ index } /> )}
-              </>
-            }
-          </div>
+          <FilmsList films={ films } />
 
           <div className="catalog__more">
             <button className="catalog__button" type="button">Show more</button>
