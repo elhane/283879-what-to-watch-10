@@ -1,9 +1,26 @@
-function PlayerScreen(): JSX.Element {
+import { useParams, useNavigate } from 'react-router-dom';
+import { Film, Films } from '../../../types/films';
+
+type PlayerScreenProps = {
+  films: Films
+};
+
+function PlayerScreen({ films } : PlayerScreenProps): JSX.Element {
+  const navigate = useNavigate();
+  const params = useParams();
+
+  const film = films.find((item) => item.id.toString() === params.id) as Film;
+
+  const onExitBtnClickHandler = () => {
+    navigate(`/films/${film.id}`);
+  };
+
+  // const { videoLink, previewImage } = props;
   return (
     <div className="player">
-      <video src="#" className="player__video" poster="img/player-poster.jpg"></video>
+      <video src={ film.videoLink } className="player__video" poster={ film.previewImage }></video>
 
-      <button type="button" className="player__exit">Exit</button>
+      <button type="button" className="player__exit" onClick={onExitBtnClickHandler}>Exit</button>
 
       <div className="player__controls">
         <div className="player__controls-row">

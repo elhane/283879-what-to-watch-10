@@ -2,7 +2,7 @@ import { Link } from 'react-router-dom';
 
 type breadcrumbsItem = {
   title: string
-  href?: string
+  href: string
 }
 
 type HeaderProps = {
@@ -32,12 +32,15 @@ function Header({
         </Link>
       </div>
 
-      { isIncludeBreadcrumbs && breadcrumbsItems.length &&
+      { isIncludeBreadcrumbs &&
         <nav className="breadcrumbs">
           <ul className="breadcrumbs__list">
-            { breadcrumbsItems.map(({ title, href }) => (
+            { breadcrumbsItems?.map(({ title, href }) => (
               <li className="breadcrumbs__item" key={ title }>
-                <a href={ href } className="breadcrumbs__link">{ title }</a>
+                {href.length ?
+                  <Link to={ href } className="breadcrumbs__link">{ title }</Link>
+                  :
+                  <span className="breadcrumbs__link">{ title }</span>}
               </li>
             ))}
           </ul>

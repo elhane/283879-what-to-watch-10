@@ -23,6 +23,7 @@ function AuthScreen(): JSX.Element {
             <button className="sign-in__btn" type="submit">Sign in</button>
           </div>
         </form>
+
       </div>
 
       <Footer />
