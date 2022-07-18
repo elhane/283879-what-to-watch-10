@@ -1,5 +1,5 @@
 import { useParams, useNavigate } from 'react-router-dom';
-import { Film, Films } from '../../../types/films';
+import { Film, Films } from '../../types/films';
 
 type PlayerScreenProps = {
   films: Films
@@ -10,17 +10,17 @@ function PlayerScreen({ films } : PlayerScreenProps): JSX.Element {
   const params = useParams();
 
   const film = films.find((item) => item.id.toString() === params.id) as Film;
+  const { videoLink, previewImage } = film;
 
   const onExitBtnClickHandler = () => {
     navigate(`/films/${film.id}`);
   };
 
-  // const { videoLink, previewImage } = props;
   return (
     <div className="player">
-      <video src={ film.videoLink } className="player__video" poster={ film.previewImage }></video>
+      <video src={ videoLink } className="player__video" poster={ previewImage }></video>
 
-      <button type="button" className="player__exit" onClick={onExitBtnClickHandler}>Exit</button>
+      <button type="button" className="player__exit" onClick={ onExitBtnClickHandler }>Exit</button>
 
       <div className="player__controls">
         <div className="player__controls-row">

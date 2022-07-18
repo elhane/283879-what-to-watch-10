@@ -1,8 +1,8 @@
-import Footer from '../../footer/footer';
-import Header from '../../header/header';
-import { Film, Films } from '../../../types/films';
+import Footer from '../../components/footer/footer';
+import Header from '../../components/header/header';
 import { useParams, useNavigate, Link, Outlet } from 'react-router-dom';
-import FilmsList from '../../films-list/films-list';
+import { Film, Films } from '../../types/films';
+import FilmsList from '../../components/films-list/films-list';
 
 type FilmScreenLayoutProps = {
   films: Films
@@ -52,14 +52,14 @@ function FilmScreenLayout({ films }: FilmScreenLayoutProps): JSX.Element {
               </p>
 
               <div className="film-card__buttons">
-                <button className="btn btn--play film-card__button" type="button" onClick={onPlayBtnClickHandler}>
+                <button className="btn btn--play film-card__button" type="button" onClick={ onPlayBtnClickHandler }>
                   <svg viewBox="0 0 19 19" width="19" height="19">
                     <use xlinkHref="#play-s"></use>
                   </svg>
                   <span>Play</span>
                 </button>
                 <button className="btn btn--list film-card__button" type="button">
-                  <svg viewBox="0 0 19 20" width="19" height="20" onClick={onMyListBtnClickHandler}>
+                  <svg viewBox="0 0 19 20" width="19" height="20" onClick={ onMyListBtnClickHandler }>
                     <use xlinkHref="#add"></use>
                   </svg>
                   <span>My list</span> <span className="film-card__count">{ films.length }</span>

@@ -1,8 +1,7 @@
-// import FilmCard from '../../film-card/film-card';
-import Footer from '../../footer/footer';
-import Header from '../../header/header';
-import { Films } from '../../../types/films';
-import FilmsList from '../../films-list/films-list';
+import Footer from '../../components/footer/footer';
+import Header from '../../components/header/header';
+import { Films } from '../../types/films';
+import FilmsList from '../../components/films-list/films-list';
 
 type FilmsListScreenProps = {
   films: Films

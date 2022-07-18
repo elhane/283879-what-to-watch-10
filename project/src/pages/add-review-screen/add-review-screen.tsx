@@ -1,7 +1,7 @@
 import { useParams} from 'react-router-dom';
-import { Film, Films } from '../../../types/films';
-import Header from '../../header/header';
-import ReviewForm from '../../review-form/review-form';
+import { Film, Films } from '../../types/films';
+import Header from '../../components/header/header';
+import ReviewForm from '../../components/review-form/review-form';
 
 type AddReviewScreenProps = {
   films: Films

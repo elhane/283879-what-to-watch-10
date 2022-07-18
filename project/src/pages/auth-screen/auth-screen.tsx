@@ -1,5 +1,5 @@
-import Footer from '../../footer/footer';
-import Header from '../../header/header';
+import Footer from '../../components/footer/footer';
+import Header from '../../components/header/header';
 
 function AuthScreen(): JSX.Element {
   return (
@@ -8,7 +8,7 @@ function AuthScreen(): JSX.Element {
       <Header isAuthorized={ false } pageTitle={ 'Sign in' } extraClasses={ 'user-page__head' } />
 
       <div className="sign-in user-page__content">
-        <form action="#" className="sign-in__form">
+        <form action="src/pages/auth-screen/auth-screen#" className="sign-in__form">
           <div className="sign-in__fields">
             <div className="sign-in__field">
               <input className="sign-in__input" type="email" placeholder="Email address" name="user-email" id="user-email"/>
