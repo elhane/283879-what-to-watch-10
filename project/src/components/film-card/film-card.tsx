@@ -17,7 +17,9 @@ function FilmCard(props: FilmCardProps): JSX.Element {
 
   const onMouseOverHandle = () => {
     makeCardActive(id);
-    setIsShowVideo(true);
+    setTimeout(() => {
+      setIsShowVideo(true);
+    }, 1000);
   };
 
   const onMouseOutHandle = () => {
@@ -27,8 +29,8 @@ function FilmCard(props: FilmCardProps): JSX.Element {
   return (
     <article
       className={`small-film-card catalog__films-card ${ isActive ? 'active' : ''}` }
-      onMouseOver={() => onMouseOverHandle()}
-      onMouseOut={() => onMouseOutHandle()}
+      onMouseOver={ onMouseOverHandle }
+      onMouseOut={ onMouseOutHandle }
     >
       <Link className="small-film-card__image small-film-card__link" to={`/films/${id}`}>
         {

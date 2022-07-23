@@ -13,9 +13,7 @@ function VideoPlayer(props: VideoPlayerProps): JSX.Element {
   const videoRef = useRef<HTMLVideoElement | null>(null);
 
   useEffect(() => {
-    setTimeout(() => {
-      setIsPlaying(isShowVideo);
-    }, 1000);
+    setIsPlaying(isShowVideo);
   }, [isShowVideo]);
 
   useEffect(() => {
