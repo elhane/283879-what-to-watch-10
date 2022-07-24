@@ -60,7 +60,7 @@ function Header({
             </div>
           </li>
           <li className="user-block__item">
-            <a className="user-block__link">Sign out</a>
+            <Link className="user-block__link" to="#">Sign out</Link>
           </li>
         </ul>}
     </header>
