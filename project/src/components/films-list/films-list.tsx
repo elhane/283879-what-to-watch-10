@@ -6,7 +6,7 @@ type FilmListProps = {
   films: Films
 };
 
-function FilmsList({films}: FilmListProps): JSX.Element {
+function FilmsList({ films }: FilmListProps): JSX.Element {
   const [activeCardId, setActiveCardId] = useState(0);
 
   const makeCardActive = (id: number) => {

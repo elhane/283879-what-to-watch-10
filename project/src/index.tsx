@@ -3,6 +3,8 @@ import ReactDOM from 'react-dom/client';
 import App from './components/app/app';
 import SvgSprite from './components/svg-sprite/svg-sprite';
 import { films } from './mocks/films';
+import { Provider } from 'react-redux';
+import { store } from './store';
 
 const FilmInfo = {
   TITLE: 'The Grand Budapest Hotel',
@@ -17,6 +19,8 @@ const root = ReactDOM.createRoot(
 root.render(
   <React.StrictMode>
     <SvgSprite />
-    <App title={ FilmInfo.TITLE } genre={ FilmInfo.GENRE } year={ FilmInfo.YEAR } films={ films } />
+    <Provider store = { store }>
+      <App title={ FilmInfo.TITLE } genre={ FilmInfo.GENRE } year={ FilmInfo.YEAR } films={ films } />
+    </Provider>
   </React.StrictMode>,
 );
