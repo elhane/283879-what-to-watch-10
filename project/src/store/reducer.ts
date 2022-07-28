@@ -1,23 +1,24 @@
 import { createReducer } from '@reduxjs/toolkit';
-import { getFilmsBySelectedGenre, selectGenre } from './action';
+import { setActiveGenre } from './action';
 import { films } from '../mocks/films';
 import { DEFAULT_FILM_GENRE } from '../const';
-import { Films } from '../types/films';
 
 const initialState = {
   genre: DEFAULT_FILM_GENRE,
-  movies: films
-};
+  movies: films,
+  promoFilm: {
+    name: 'The Grand Budapest Hotel',
+    genre: 'Drama',
+    released: 2014
+  },
+  genresList: [ DEFAULT_FILM_GENRE, ...Array.from(new Set(films.map((film) => film.genre))).sort()]
 
-const getFilteredFilms = (genre: string, movies: Films): Films => movies.filter((film) => genre === DEFAULT_FILM_GENRE ? movies : film.genre === genre);
+};
 
 const reducer = createReducer(initialState, (builder) => {
   builder
-    .addCase(selectGenre,(state, action) => {
+    .addCase(setActiveGenre,(state, action) => {
       state.genre = action.payload;
-    })
-    .addCase(getFilmsBySelectedGenre, (state) => {
-      state.movies = getFilteredFilms(state.genre, films);
     });
 });
 

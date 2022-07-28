@@ -1,15 +1,13 @@
 import { useParams} from 'react-router-dom';
-import { Film, Films } from '../../types/films';
+import { Film } from '../../types/films';
 import Header from '../../components/header/header';
 import ReviewForm from '../../components/review-form/review-form';
+import { useAppSelector } from '../../hooks';
 
-type AddReviewScreenProps = {
-  films: Films
-};
-
-function AddReviewScreen({ films }: AddReviewScreenProps): JSX.Element {
+function AddReviewScreen(): JSX.Element {
   const params = useParams();
-  const film = films.find((item) => item.id.toString() === params.id) as Film;
+  const movies = useAppSelector((state) => state.movies);
+  const film = movies.find((item) => item.id.toString() === params.id) as Film;
 
   const {
     id,

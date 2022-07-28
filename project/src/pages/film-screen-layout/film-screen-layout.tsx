@@ -1,16 +1,15 @@
 import Footer from '../../components/footer/footer';
 import Header from '../../components/header/header';
 import { useParams, useNavigate, Link, Outlet } from 'react-router-dom';
-import { Film, Films } from '../../types/films';
+import { Film } from '../../types/films';
 import FilmsList from '../../components/films-list/films-list';
+import { useAppSelector } from '../../hooks';
 
-type FilmScreenLayoutProps = {
-  films: Films
-}
 
-function FilmScreenLayout({ films }: FilmScreenLayoutProps): JSX.Element {
+function FilmScreenLayout(): JSX.Element {
   const params = useParams();
-  const film = films.find((item) => item.id.toString() === params.id) as Film;
+  const movies = useAppSelector((state) => state.movies);
+  const film = movies.find((item) => item.id.toString() === params.id) as Film;
 
   const {
     id,
@@ -62,7 +61,7 @@ function FilmScreenLayout({ films }: FilmScreenLayoutProps): JSX.Element {
                   <svg viewBox="0 0 19 20" width="19" height="20" onClick={ onMyListBtnClickHandler }>
                     <use xlinkHref="#add"></use>
                   </svg>
-                  <span>My list</span> <span className="film-card__count">{ films.length }</span>
+                  <span>My list</span> <span className="film-card__count">{ movies.length }</span>
                 </button>
                 <Link to={`/films/${id}/review`} className="btn film-card__button">Add review</Link>
               </div>
@@ -88,7 +87,7 @@ function FilmScreenLayout({ films }: FilmScreenLayoutProps): JSX.Element {
           <h2 className="catalog__title">More like this</h2>
 
           <div className="catalog__films-list">
-            <FilmsList films={ films } />
+            <FilmsList />
           </div>
         </section>
 
