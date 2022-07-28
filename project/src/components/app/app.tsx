@@ -8,25 +8,18 @@ import AddReviewScreen from '../../pages/add-review-screen/add-review-screen';
 import PlayerScreen from '../../pages/player-screen/player-screen';
 import NotFoundScreen from '../../pages/not-found-screen/not-found-screen';
 import PrivateRoute from '../private-route/private-route';
-import { Films } from '../../types/films';
 import Overview from '../overview/overview';
 import Details from '../details/details';
 import Reviews from '../reviews/reviews';
 
-type AppScreenProps = {
-  title: string,
-  genre: string,
-  year: number,
-  films: Films
-}
+function App(): JSX.Element {
 
-function App({ title, genre, year, films }: AppScreenProps): JSX.Element {
   return (
     <BrowserRouter>
       <Routes>
         <Route
           path={ AppRoute.Root }
-          element={ <FirstScreen title={ title } genre={ genre } year={ year } films={ films } /> }
+          element={ <FirstScreen /> }
         />
         <Route
           path={ AppRoute.Login }
@@ -36,24 +29,24 @@ function App({ title, genre, year, films }: AppScreenProps): JSX.Element {
           path={ AppRoute.FilmsList }
           element={
             <PrivateRoute authorizationStatus={ AuthorizationStatus.Auth } >
-              <FilmsListScreen films={ films } />
+              <FilmsListScreen />
             </PrivateRoute>
           }
         />
 
-        <Route path={ AppRoute.Films } element={ <FilmScreenLayout films={ films }/> }>
-          <Route path=":id" element={<Overview films={ films } /> } />
-          <Route path=":id/details" element={<Details films={ films } /> } />
-          <Route path=":id/reviews" element={<Reviews films={ films } /> } />
+        <Route path={ AppRoute.Films } element={ <FilmScreenLayout /> }>
+          <Route path=":id" element={<Overview /> } />
+          <Route path=":id/details" element={<Details /> } />
+          <Route path=":id/reviews" element={<Reviews /> } />
         </Route>
 
         <Route
           path={ AppRoute.AddReview }
-          element={ <AddReviewScreen films={ films } /> }
+          element={ <AddReviewScreen /> }
         />
         <Route
           path={ AppRoute.Player }
-          element={ <PlayerScreen films={ films } /> }
+          element={ <PlayerScreen /> }
         />
         <Route
           path="*"

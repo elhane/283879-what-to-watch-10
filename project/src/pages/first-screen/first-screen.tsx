@@ -1,18 +1,13 @@
-import FilmsList from '../../components/films-list/films-list';
-import { Films } from '../../types/films';
 import Footer from '../../components/footer/footer';
 import Header from '../../components/header/header';
 import { useNavigate } from 'react-router-dom';
+import GenresTabs from '../../components/genres-tabs/genres-tabs';
+import FilmsList from '../../components/films-list/films-list';
+import { useAppSelector } from '../../hooks';
 
-type FirstScreenProps = {
-  title: string,
-  genre: string,
-  year: number,
-  films: Films
-}
-
-function FirstScreen({ title, genre, year, films }: FirstScreenProps): JSX.Element {
-
+function FirstScreen(): JSX.Element {
+  const movies = useAppSelector((state) => state.movies);
+  const promoFilm = useAppSelector((state) => state.promoFilm);
   const navigate = useNavigate();
 
   const onPlayBtnClickHandler = () => {
@@ -41,10 +36,10 @@ function FirstScreen({ title, genre, year, films }: FirstScreenProps): JSX.Eleme
             </div>
 
             <div className="film-card__desc">
-              <h2 className="film-card__title">{ title }</h2>
+              <h2 className="film-card__title">{ promoFilm.name }</h2>
               <p className="film-card__meta">
-                <span className="film-card__genre">{ genre }</span>
-                <span className="film-card__year">{ year }</span>
+                <span className="film-card__genre">{ promoFilm.genre }</span>
+                <span className="film-card__year">{ promoFilm.released }</span>
               </p>
 
               <div className="film-card__buttons">
@@ -58,7 +53,7 @@ function FirstScreen({ title, genre, year, films }: FirstScreenProps): JSX.Eleme
                   <svg viewBox="0 0 19 20" width="19" height="20">
                     <use xlinkHref="#add"></use>
                   </svg>
-                  <span>My list</span> <span className="film-card__count">{ films.length }</span>
+                  <span>My list</span> <span className="film-card__count">{ movies.length }</span>
                 </button>
               </div>
             </div>
@@ -70,40 +65,8 @@ function FirstScreen({ title, genre, year, films }: FirstScreenProps): JSX.Eleme
         <section className="catalog">
           <h2 className="catalog__title visually-hidden">Catalog</h2>
 
-          <ul className="catalog__genres-list">
-            <li className="catalog__genres-item catalog__genres-item--active">
-              <a href="src/pages/first-screen/first-screen#" className="catalog__genres-link">All genres</a>
-            </li>
-            <li className="catalog__genres-item">
-              <a href="src/pages/first-screen/first-screen#" className="catalog__genres-link">Comedies</a>
-            </li>
-            <li className="catalog__genres-item">
-              <a href="src/pages/first-screen/first-screen#" className="catalog__genres-link">Crime</a>
-            </li>
-            <li className="catalog__genres-item">
-              <a href="src/pages/first-screen/first-screen#" className="catalog__genres-link">Documentary</a>
-            </li>
-            <li className="catalog__genres-item">
-              <a href="src/pages/first-screen/first-screen#" className="catalog__genres-link">Dramas</a>
-            </li>
-            <li className="catalog__genres-item">
-              <a href="src/pages/first-screen/first-screen#" className="catalog__genres-link">Horror</a>
-            </li>
-            <li className="catalog__genres-item">
-              <a href="src/pages/first-screen/first-screen#" className="catalog__genres-link">Kids & Family</a>
-            </li>
-            <li className="catalog__genres-item">
-              <a href="src/pages/first-screen/first-screen#" className="catalog__genres-link">Romance</a>
-            </li>
-            <li className="catalog__genres-item">
-              <a href="src/pages/first-screen/first-screen#" className="catalog__genres-link">Sci-Fi</a>
-            </li>
-            <li className="catalog__genres-item">
-              <a href="src/pages/first-screen/first-screen#" className="catalog__genres-link">Thrillers</a>
-            </li>
-          </ul>
-
-          <FilmsList films={ films } />
+          <GenresTabs />
+          <FilmsList />
 
           <div className="catalog__more">
             <button className="catalog__button" type="button">Show more</button>
