@@ -4,11 +4,11 @@ import FilmsList from '../../components/films-list/films-list';
 import { useAppSelector } from '../../hooks';
 
 function FilmsListScreen(): JSX.Element {
-  const movies = useAppSelector((state) => state.movies);
+  const favoritesList = useAppSelector((state) => state.favoritesList);
 
   return (
     <div className="user-page">
-      <Header isAuthorized pageTitle={ 'My list' } filmsCount={ movies.length } extraClasses={ 'user-page__head' }/>
+      <Header isAuthorized pageTitle={ 'My list' } filmsCount={ favoritesList.length } extraClasses={ 'user-page__head' }/>
 
       <section className="catalog">
         <h2 className="catalog__title visually-hidden">Catalog</h2>
