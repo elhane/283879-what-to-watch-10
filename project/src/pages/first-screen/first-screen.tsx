@@ -6,7 +6,7 @@ import FilmsList from '../../components/films-list/films-list';
 import { useAppSelector } from '../../hooks';
 
 function FirstScreen(): JSX.Element {
-  const movies = useAppSelector((state) => state.movies);
+  const favoritesList = useAppSelector((state) => state.favoritesList);
   const promoFilm = useAppSelector((state) => state.promoFilm);
   const navigate = useNavigate();
 
@@ -53,7 +53,7 @@ function FirstScreen(): JSX.Element {
                   <svg viewBox="0 0 19 20" width="19" height="20">
                     <use xlinkHref="#add"></use>
                   </svg>
-                  <span>My list</span> <span className="film-card__count">{ movies.length }</span>
+                  <span>My list</span> <span className="film-card__count">{ favoritesList.length }</span>
                 </button>
               </div>
             </div>
@@ -67,10 +67,6 @@ function FirstScreen(): JSX.Element {
 
           <GenresTabs />
           <FilmsList />
-
-          <div className="catalog__more">
-            <button className="catalog__button" type="button">Show more</button>
-          </div>
         </section>
 
         <Footer />

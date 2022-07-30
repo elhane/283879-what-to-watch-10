@@ -2,13 +2,13 @@ import Footer from '../../components/footer/footer';
 import Header from '../../components/header/header';
 import { useParams, useNavigate, Link, Outlet } from 'react-router-dom';
 import { Film } from '../../types/films';
-import FilmsList from '../../components/films-list/films-list';
+import SimilarFilmsList from '../../components/similar-films-list/similar-films-list';
 import { useAppSelector } from '../../hooks';
-
 
 function FilmScreenLayout(): JSX.Element {
   const params = useParams();
   const movies = useAppSelector((state) => state.movies);
+  const favoritesList = useAppSelector((state) => state.favoritesList);
   const film = movies.find((item) => item.id.toString() === params.id) as Film;
 
   const {
@@ -61,7 +61,7 @@ function FilmScreenLayout(): JSX.Element {
                   <svg viewBox="0 0 19 20" width="19" height="20" onClick={ onMyListBtnClickHandler }>
                     <use xlinkHref="#add"></use>
                   </svg>
-                  <span>My list</span> <span className="film-card__count">{ movies.length }</span>
+                  <span>My list</span> <span className="film-card__count">{ favoritesList.length }</span>
                 </button>
                 <Link to={`/films/${id}/review`} className="btn film-card__button">Add review</Link>
               </div>
@@ -87,7 +87,7 @@ function FilmScreenLayout(): JSX.Element {
           <h2 className="catalog__title">More like this</h2>
 
           <div className="catalog__films-list">
-            <FilmsList />
+            <SimilarFilmsList genre={ genre } filmId={ id }/>
           </div>
         </section>
 
