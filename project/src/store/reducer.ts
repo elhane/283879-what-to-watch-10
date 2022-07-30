@@ -1,5 +1,5 @@
 import { createReducer } from '@reduxjs/toolkit';
-import {resetFilmCards, setActiveGenre, showMoreCards} from './action';
+import { resetFilmCards, resetCardsToShowAmount, setActiveGenre, showMoreCards } from './action';
 import { films } from '../mocks/films';
 import { DEFAULT_FILM_GENRE, FILMS_PER_STEP_AMOUNT } from '../const';
 
@@ -23,6 +23,9 @@ const reducer = createReducer(initialState, (builder) => {
     })
     .addCase(showMoreCards, (state) => {
       state.cardsToShowAmount += FILMS_PER_STEP_AMOUNT;
+    })
+    .addCase(resetCardsToShowAmount, (state) => {
+      state.cardsToShowAmount = FILMS_PER_STEP_AMOUNT;
     })
     .addCase(resetFilmCards, (state) => {
       state.cardsToShowAmount = FILMS_PER_STEP_AMOUNT;

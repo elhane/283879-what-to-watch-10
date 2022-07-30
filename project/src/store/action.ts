@@ -7,3 +7,5 @@ export const setActiveGenre = createAction('film/setActiveGenre', (value) => ({
 export const showMoreCards = createAction('film/showMoreCards');
 
 export const resetFilmCards = createAction('film/resetFilmCards');
+
+export const resetCardsToShowAmount = createAction('film/resetCardsToShowAmount');

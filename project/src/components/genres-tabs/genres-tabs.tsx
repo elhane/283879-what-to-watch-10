@@ -1,7 +1,7 @@
 import './genre-tabs.css';
 import React from 'react';
 import { useAppDispatch, useAppSelector } from '../../hooks';
-import { setActiveGenre } from '../../store/action';
+import { resetCardsToShowAmount, setActiveGenre } from '../../store/action';
 
 function GenresTabs(): JSX.Element {
   const dispatch = useAppDispatch();
@@ -10,6 +10,7 @@ function GenresTabs(): JSX.Element {
 
   const onTabClickHandler = (evt: React.MouseEvent<HTMLButtonElement>) => {
     dispatch(setActiveGenre(evt.currentTarget.textContent));
+    dispatch(resetCardsToShowAmount());
   };
 
   return (
