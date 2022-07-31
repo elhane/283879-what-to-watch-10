@@ -1,19 +1,54 @@
 import { createReducer } from '@reduxjs/toolkit';
-import { resetFilmCards, resetCardsToShowAmount, setActiveGenre, showMoreCards } from './action';
-import { films } from '../mocks/films';
+import {
+  resetFilmCards,
+  resetCardsToShowAmount,
+  setActiveGenre,
+  showMoreCards,
+  loadFilms,
+  setDataLoadedStatus,
+  setError
+} from './action';
+import { Film, Films } from '../types/films';
 import { DEFAULT_FILM_GENRE, FILMS_PER_STEP_AMOUNT } from '../const';
 
-const initialState = {
+type initialState = {
+  genre: string,
+  movies: Films,
+  promoFilm: Film,
+  genresList: string[],
+  cardsToShowAmount: number,
+  favoritesList: Films,
+  isDataLoaded: boolean,
+  error: string | null
+}
+
+const initialState: initialState = {
   genre: DEFAULT_FILM_GENRE,
-  movies: films,
+  movies: [],
   promoFilm: {
     name: 'The Grand Budapest Hotel',
     genre: 'Drama',
-    released: 2014
+    released: 2014,
+    id: 123,
+    posterImage: '',
+    previewImage: '',
+    backgroundImage: '',
+    backgroundColor: '',
+    videoLink: '',
+    previewVideoLink: '',
+    description: '',
+    rating: 0,
+    scoresCount: 0,
+    director: '',
+    starring: ['', ''],
+    runTime: 123,
+    isFavorite: true,
   },
-  genresList: [ DEFAULT_FILM_GENRE, ...Array.from(new Set(films.map((film) => film.genre))).sort()],
+  genresList: [],
   cardsToShowAmount: FILMS_PER_STEP_AMOUNT,
-  favoritesList: films.filter((film) => film.isFavorite)
+  favoritesList: [],
+  isDataLoaded: false,
+  error: null
 };
 
 const reducer = createReducer(initialState, (builder) => {
@@ -30,6 +65,16 @@ const reducer = createReducer(initialState, (builder) => {
     .addCase(resetFilmCards, (state) => {
       state.cardsToShowAmount = FILMS_PER_STEP_AMOUNT;
       state.genre = DEFAULT_FILM_GENRE;
+    })
+    .addCase(loadFilms, (state, action) => {
+      state.movies = action.payload;
+      state.genresList = [ DEFAULT_FILM_GENRE, ...Array.from(new Set(action.payload.map((film) => film.genre))).sort()];
+    })
+    .addCase(setDataLoadedStatus, (state, action) => {
+      state.isDataLoaded = action.payload;
+    })
+    .addCase(setError, (state, action) => {
+      state.error = action.payload;
     });
 });
 
