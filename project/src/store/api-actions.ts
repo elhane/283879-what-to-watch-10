@@ -4,10 +4,10 @@ import { AppDispatch, State } from '../types/state.js';
 import { Films } from '../types/films';
 import { loadFilms, setDataLoadedStatus, setError } from './action';
 import { APIRoute, TIMEOUT_SHOW_ERROR } from '../const';
-import {store} from './';
+import { store } from './';
 
 export const clearErrorAction = createAsyncThunk(
-  'game/clearError',
+  'main/clearError',
   () => {
     setTimeout(
       () => store.dispatch(setError(null)),

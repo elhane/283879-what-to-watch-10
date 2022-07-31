@@ -15,4 +15,4 @@ export const loadFilms = createAction<Films>('data/loadFilms');
 
 export const setDataLoadedStatus = createAction<boolean>('data/setDataLoadedStatus');
 
-export const setError = createAction<string | null>('game/setError');
+export const setError = createAction<string | null>('main/setError');
