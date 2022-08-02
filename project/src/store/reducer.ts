@@ -7,7 +7,7 @@ import {
   loadFilms,
   setDataLoadedStatus,
   setError,
-  requireAuthorization,
+  setAuthorizationStatus,
   setUserAvatar
 } from './action';
 import { Film, Films } from '../types/films';
@@ -82,7 +82,7 @@ const reducer = createReducer(initialState, (builder) => {
     .addCase(setError, (state, action) => {
       state.error = action.payload;
     })
-    .addCase(requireAuthorization, (state, action) => {
+    .addCase(setAuthorizationStatus, (state, action) => {
       state.authorizationStatus = action.payload;
     })
     .addCase(setUserAvatar, (state, action) => {
