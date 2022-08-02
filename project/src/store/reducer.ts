@@ -6,10 +6,12 @@ import {
   showMoreCards,
   loadFilms,
   setDataLoadedStatus,
-  setError
+  setError,
+  requireAuthorization,
+  setUserAvatar
 } from './action';
 import { Film, Films } from '../types/films';
-import { DEFAULT_FILM_GENRE, FILMS_PER_STEP_AMOUNT } from '../const';
+import { AuthorizationStatus, DEFAULT_FILM_GENRE, FILMS_PER_STEP_AMOUNT} from '../const';
 
 type initialState = {
   genre: string,
@@ -19,7 +21,9 @@ type initialState = {
   cardsToShowAmount: number,
   favoritesList: Films,
   isDataLoaded: boolean,
-  error: string | null
+  error: string | null,
+  authorizationStatus: AuthorizationStatus,
+  avatarUrl: string
 }
 
 const initialState: initialState = {
@@ -48,7 +52,9 @@ const initialState: initialState = {
   cardsToShowAmount: FILMS_PER_STEP_AMOUNT,
   favoritesList: [],
   isDataLoaded: false,
-  error: null
+  error: null,
+  authorizationStatus: AuthorizationStatus.Unknown,
+  avatarUrl: 'img/avatar.jpg'
 };
 
 const reducer = createReducer(initialState, (builder) => {
@@ -75,6 +81,12 @@ const reducer = createReducer(initialState, (builder) => {
     })
     .addCase(setError, (state, action) => {
       state.error = action.payload;
+    })
+    .addCase(requireAuthorization, (state, action) => {
+      state.authorizationStatus = action.payload;
+    })
+    .addCase(setUserAvatar, (state, action) => {
+      state.avatarUrl = action.payload;
     });
 });
 

@@ -40,7 +40,7 @@ function FilmScreenLayout(): JSX.Element {
 
           <h1 className="visually-hidden">WTW</h1>
 
-          <Header isAuthorized extraClasses={ 'film-card__head' }/>
+          <Header extraClasses={ 'film-card__head' }/>
 
           <div className="film-card__wrap">
             <div className="film-card__desc">

@@ -28,7 +28,6 @@ function AddReviewScreen(): JSX.Element {
         <h1 className="visually-hidden">WTW</h1>
 
         <Header
-          isAuthorized
           isIncludeBreadcrumbs
           breadcrumbsItems={[
             { title: name, href: filmHref },

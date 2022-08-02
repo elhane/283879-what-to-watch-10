@@ -8,7 +8,7 @@ function FilmsListScreen(): JSX.Element {
 
   return (
     <div className="user-page">
-      <Header isAuthorized pageTitle={ 'My list' } filmsCount={ favoritesList.length } extraClasses={ 'user-page__head' }/>
+      <Header pageTitle={ 'My list' } filmsCount={ favoritesList.length } extraClasses={ 'user-page__head' }/>
 
       <section className="catalog">
         <h2 className="catalog__title visually-hidden">Catalog</h2>

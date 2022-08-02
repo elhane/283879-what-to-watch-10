@@ -1,4 +1,7 @@
 import { Link } from 'react-router-dom';
+import { useAppDispatch, useAppSelector } from '../../hooks';
+import { logoutAction } from '../../store/api-actions';
+import { AppRoute, AuthorizationStatus } from '../../const';
 
 type breadcrumbsItem = {
   title: string
@@ -6,7 +9,7 @@ type breadcrumbsItem = {
 }
 
 type HeaderProps = {
-  isAuthorized: boolean,
+  isShowLoginLink?: boolean,
   isIncludeBreadcrumbs?: boolean,
   breadcrumbsItems?: breadcrumbsItem[],
   pageTitle?: string,
@@ -15,13 +18,18 @@ type HeaderProps = {
 }
 
 function Header({
-  isAuthorized,
+  isShowLoginLink = true,
   isIncludeBreadcrumbs,
   breadcrumbsItems = [],
   pageTitle,
   filmsCount,
   extraClasses = ''
 }: HeaderProps): JSX.Element {
+
+  const dispatch = useAppDispatch();
+  const authorizationStatus = useAppSelector((state) => state.authorizationStatus);
+  const avatarUrl = useAppSelector((state) => state.avatarUrl);
+
   return (
     <header className={`page-header ${ extraClasses }`}>
       <div className="logo">
@@ -48,21 +56,38 @@ function Header({
 
       { pageTitle && pageTitle.length &&
         <h1 className="page-title user-page__title">{ pageTitle }
-          { filmsCount && filmsCount > 0 &&
-            <span className="user-page__film-count">{ filmsCount }</span>}
+          { (filmsCount && filmsCount > 1) ?
+            <span className="user-page__film-count"> { filmsCount } </span>
+            :
+            '' }
         </h1>}
 
-      { isAuthorized &&
-        <ul className="user-block">
-          <li className="user-block__item">
-            <div className="user-block__avatar">
-              <img src="img/avatar.jpg" alt="User avatar" width="63" height="63"/>
-            </div>
-          </li>
-          <li className="user-block__item">
-            <Link className="user-block__link" to="#">Sign out</Link>
-          </li>
-        </ul>}
+      { authorizationStatus === AuthorizationStatus.Auth ?
+        (
+          <ul className="user-block">
+            <li className="user-block__item">
+              <div className="user-block__avatar">
+                <img src={ avatarUrl } alt="User avatar" width="63" height="63"/>
+              </div>
+            </li>
+            <li className="user-block__item">
+              <Link className="user-block__link"
+                to="/"
+                onClick={(evt) => {
+                  evt.preventDefault();
+                  dispatch(logoutAction());
+                }}
+              >Sign out
+              </Link>
+            </li>
+          </ul>
+        )
+        :
+        ( isShowLoginLink &&
+          <div className="user-block">
+            <Link className="user-block__link" to={ AppRoute.Login }>Sign in</Link>
+          </div>
+        )}
     </header>
   );
 }
