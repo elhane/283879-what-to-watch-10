@@ -9,8 +9,8 @@ import {
   setDataLoadedStatus,
   setError,
   setAuthorizationStatus,
-  setUserAvatar,
-  redirectToRoute
+  redirectToRoute,
+  setUserData
 } from './action';
 import { saveToken, dropToken } from '../services/token';
 import { APIRoute, TIMEOUT_SHOW_ERROR, AuthorizationStatus, AppRoute } from '../const';
@@ -48,8 +48,9 @@ export const checkAuthAction = createAsyncThunk<void, undefined, {
   'user/checkAuth',
   async (_arg, {dispatch, extra: api}) => {
     try {
-      await api.get(APIRoute.Login);
+      const {data: { name, email, id, avatarUrl }} = await api.get(APIRoute.Login);
       dispatch(setAuthorizationStatus(AuthorizationStatus.Auth));
+      dispatch(setUserData({name, email, id, avatarUrl }));
     } catch {
       dispatch(setAuthorizationStatus(AuthorizationStatus.NoAuth));
     }
@@ -63,10 +64,10 @@ export const loginAction = createAsyncThunk<void, AuthData, {
 }>(
   'user/login',
   async ({login: email, password}, {dispatch, extra: api}) => {
-    const {data: {token, avatarUrl }} = await api.post<UserData>(APIRoute.Login, {email, password});
+    const {data: { token, name, id, avatarUrl }} = await api.post<UserData>(APIRoute.Login, {email, password});
     saveToken(token);
     dispatch(setAuthorizationStatus(AuthorizationStatus.Auth));
-    dispatch(setUserAvatar(avatarUrl));
+    dispatch(setUserData({name, email, id, avatarUrl }));
     dispatch(redirectToRoute(AppRoute.Root));
   },
 );

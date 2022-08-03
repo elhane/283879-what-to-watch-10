@@ -20,7 +20,7 @@ function AuthScreen(): JSX.Element {
 
   const validations = {
     email: /^([\w.%+-]+)@([\w-]+\.)+(\w{2,})$/i,
-    password: /[\da-zA-Z]{2,}/g
+    password: /^(?=.*[a-zA-Z])(?=.*\d).{2,}$/g
   };
 
   const validateField = (fieldName: string, value: string) => {

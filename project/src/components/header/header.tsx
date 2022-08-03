@@ -28,7 +28,7 @@ function Header({
 
   const dispatch = useAppDispatch();
   const authorizationStatus = useAppSelector((state) => state.authorizationStatus);
-  const avatarUrl = useAppSelector((state) => state.avatarUrl);
+  const userData = useAppSelector((state) => state.userData);
 
   return (
     <header className={`page-header ${ extraClasses }`}>
@@ -67,7 +67,9 @@ function Header({
           <ul className="user-block">
             <li className="user-block__item">
               <div className="user-block__avatar">
-                <img src={ avatarUrl } alt="User avatar" width="63" height="63"/>
+                <Link to={ AppRoute.FilmsList }>
+                  <img src={ userData.avatarUrl } alt="User avatar" width="63" height="63"/>
+                </Link>
               </div>
             </li>
             <li className="user-block__item">

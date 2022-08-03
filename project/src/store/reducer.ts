@@ -8,12 +8,13 @@ import {
   setDataLoadedStatus,
   setError,
   setAuthorizationStatus,
-  setUserAvatar
+  setUserData
 } from './action';
 import { Film, Films } from '../types/films';
+import { UserType } from '../types/user-data';
 import { AuthorizationStatus, DEFAULT_FILM_GENRE, FILMS_PER_STEP_AMOUNT} from '../const';
 
-type initialState = {
+type initialStateType = {
   genre: string,
   movies: Films,
   promoFilm: Film,
@@ -23,10 +24,10 @@ type initialState = {
   isDataLoaded: boolean,
   error: string | null,
   authorizationStatus: AuthorizationStatus,
-  avatarUrl: string
+  userData: UserType
 }
 
-const initialState: initialState = {
+const initialState: initialStateType = {
   genre: DEFAULT_FILM_GENRE,
   movies: [],
   promoFilm: {
@@ -54,7 +55,12 @@ const initialState: initialState = {
   isDataLoaded: false,
   error: null,
   authorizationStatus: AuthorizationStatus.Unknown,
-  avatarUrl: 'img/avatar.jpg'
+  userData: {
+    name: '',
+    email: '',
+    id: 0,
+    avatarUrl: '',
+  }
 };
 
 const reducer = createReducer(initialState, (builder) => {
@@ -85,8 +91,8 @@ const reducer = createReducer(initialState, (builder) => {
     .addCase(setAuthorizationStatus, (state, action) => {
       state.authorizationStatus = action.payload;
     })
-    .addCase(setUserAvatar, (state, action) => {
-      state.avatarUrl = action.payload;
+    .addCase(setUserData, (state, action) => {
+      state.userData = action.payload;
     });
 });
 
