@@ -22,11 +22,12 @@ function SimilarFilmsList({ genre, filmId }: SimilarFilmsListProps): JSX.Element
   };
 
   return (
-    <div className={'catalog__films-list'}>
+    <>
       {
-        filteredFilms.map((film) => <FilmCard key={ film.id } { ...film } isActive={(activeCardId === film.id)} makeCardActive={makeCardActive} />)
+        filteredFilms.map((film) => <FilmCard key={ film.id } { ...film } isActive={(activeCardId === film.id)} makeCardActive={ makeCardActive } />)
       }
-    </div>
+    </>
+
   );
 }
 

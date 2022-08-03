@@ -6,7 +6,7 @@ function NotFoundScreen(): JSX.Element {
   return (
     <div className="not-found-page">
       <div className="page-content">
-        <Header isAuthorized={ false } />
+        <Header />
 
         <div className="not-found-page__content" style={{ marginBottom: '40px', minHeight: 'calc(100vh - 336px)' }}>
           <p style={{ textAlign: 'center' }}>404 - page not found</p>

@@ -6,12 +6,15 @@ import {
   showMoreCards,
   loadFilms,
   setDataLoadedStatus,
-  setError
+  setError,
+  setAuthorizationStatus,
+  setUserData
 } from './action';
 import { Film, Films } from '../types/films';
-import { DEFAULT_FILM_GENRE, FILMS_PER_STEP_AMOUNT } from '../const';
+import { UserType } from '../types/user-data';
+import { AuthorizationStatus, DEFAULT_FILM_GENRE, FILMS_PER_STEP_AMOUNT} from '../const';
 
-type initialState = {
+type initialStateType = {
   genre: string,
   movies: Films,
   promoFilm: Film,
@@ -19,10 +22,12 @@ type initialState = {
   cardsToShowAmount: number,
   favoritesList: Films,
   isDataLoaded: boolean,
-  error: string | null
+  error: string | null,
+  authorizationStatus: AuthorizationStatus,
+  userData: UserType
 }
 
-const initialState: initialState = {
+const initialState: initialStateType = {
   genre: DEFAULT_FILM_GENRE,
   movies: [],
   promoFilm: {
@@ -48,7 +53,14 @@ const initialState: initialState = {
   cardsToShowAmount: FILMS_PER_STEP_AMOUNT,
   favoritesList: [],
   isDataLoaded: false,
-  error: null
+  error: null,
+  authorizationStatus: AuthorizationStatus.Unknown,
+  userData: {
+    name: '',
+    email: '',
+    id: 0,
+    avatarUrl: '',
+  }
 };
 
 const reducer = createReducer(initialState, (builder) => {
@@ -75,6 +87,12 @@ const reducer = createReducer(initialState, (builder) => {
     })
     .addCase(setError, (state, action) => {
       state.error = action.payload;
+    })
+    .addCase(setAuthorizationStatus, (state, action) => {
+      state.authorizationStatus = action.payload;
+    })
+    .addCase(setUserData, (state, action) => {
+      state.userData = action.payload;
     });
 });
 
