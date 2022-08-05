@@ -1,7 +1,8 @@
 import { createAction } from '@reduxjs/toolkit';
-import { Films } from '../types/films';
+import { Films, Film } from '../types/films';
 import { AuthorizationStatus, AppRoute } from '../const';
 import { UserType } from '../types/user-data';
+import { Comments } from '../types/comments';
 
 export const setActiveGenre = createAction('film/setActiveGenre', (value) => ({
   payload: value,
@@ -23,4 +24,11 @@ export const setAuthorizationStatus = createAction<AuthorizationStatus>('user/se
 
 export const setUserData = createAction<UserType>('user/setUserData');
 
-export const redirectToRoute = createAction<AppRoute>('main/redirectToRoute');
+export const redirectToRoute = createAction<AppRoute | string>('main/redirectToRoute');
+
+export const setCurrentFilm = createAction<Film>('data/setCurrentFilm');
+
+export const setSimilarFilms = createAction<Films>('data/setSimilarFilms');
+
+export const setFilmReviews = createAction<Comments>('data/setFilmReviews');
+

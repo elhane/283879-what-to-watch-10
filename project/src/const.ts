@@ -3,8 +3,10 @@ export enum AppRoute {
   Login = '/login',
   FilmsList = '/mylist',
   Films = '/films/',
+  Film = '/films/:id',
   AddReview = '/films/:id/review',
-  Player = '/player/:id'
+  Player = '/player/:id',
+  NotFound = '*'
 }
 
 export enum AuthorizationStatus {
@@ -21,6 +23,13 @@ export enum APIRoute {
   Films = '/films',
   Login = '/login',
   Logout = '/logout',
+  Comments = '/comments'
 }
 
 export const TIMEOUT_SHOW_ERROR = 3000;
+
+export enum TabsNames {
+  Overview = 'Overview',
+  Details = 'Details',
+  Reviews = 'Reviews'
+}

@@ -1,15 +1,20 @@
 import Footer from '../../components/footer/footer';
 import Header from '../../components/header/header';
-import { useParams, useNavigate, Link, Outlet } from 'react-router-dom';
-import { Film } from '../../types/films';
+import { Link, useNavigate, useParams } from 'react-router-dom';
 import SimilarFilmsList from '../../components/similar-films-list/similar-films-list';
 import { useAppSelector } from '../../hooks';
+import { useEffect } from 'react';
+import { AppRoute, AuthorizationStatus } from '../../const';
+import Tabs from '../../components/tabs/tabs';
 
-function FilmScreenLayout(): JSX.Element {
+function FilmScreen(): JSX.Element {
   const params = useParams();
   const movies = useAppSelector((state) => state.movies);
   const favoritesList = useAppSelector((state) => state.favoritesList);
-  const film = movies.find((item) => item.id.toString() === params.id) as Film;
+  const film = useAppSelector((state) => state.currentFilm);
+  const similarFilms = useAppSelector((state) => state.similarFilms);
+  const authorizationStatus = useAppSelector((state) => state.authorizationStatus);
+  const filmsIds = movies.map((movie) => movie.id);
 
   const {
     id,
@@ -29,6 +34,12 @@ function FilmScreenLayout(): JSX.Element {
   const onMyListBtnClickHandler = () => {
     //callback для добавления фильма в список?
   };
+
+  useEffect(() => {
+    if (!filmsIds.includes(Number(params?.id))) {
+      navigate(AppRoute.NotFound);
+    }
+  }, [params?.id]);
 
   return (
     <>
@@ -57,13 +68,16 @@ function FilmScreenLayout(): JSX.Element {
                   </svg>
                   <span>Play</span>
                 </button>
+
                 <button className="btn btn--list film-card__button" type="button">
                   <svg viewBox="0 0 19 20" width="19" height="20" onClick={ onMyListBtnClickHandler }>
                     <use xlinkHref="#add"></use>
                   </svg>
                   <span>My list</span> <span className="film-card__count">{ favoritesList.length }</span>
                 </button>
-                <Link to={`/films/${id}/review`} className="btn film-card__button">Add review</Link>
+
+                { authorizationStatus === AuthorizationStatus.Auth && <Link to={`/films/${id}/review`} className="btn film-card__button">Add review</Link> }
+
               </div>
             </div>
           </div>
@@ -76,8 +90,9 @@ function FilmScreenLayout(): JSX.Element {
             </div>
 
             <div className="film-card__desc">
-              <Outlet />
+              <Tabs />
             </div>
+
           </div>
         </div>
       </section>
@@ -87,15 +102,14 @@ function FilmScreenLayout(): JSX.Element {
           <h2 className="catalog__title">More like this</h2>
 
           <div className="catalog__films-list">
-            <SimilarFilmsList genre={ genre } filmId={ id }/>
+            <SimilarFilmsList filmId={ id } films={ similarFilms }/>
           </div>
         </section>
 
         <Footer />
       </div>
-
     </>
   );
 }
 
-export default FilmScreenLayout;
+export default FilmScreen;

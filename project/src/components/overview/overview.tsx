@@ -1,14 +1,8 @@
-import { useParams, Link } from 'react-router-dom';
-import { Film } from '../../types/films';
 import { useAppSelector } from '../../hooks';
 
 function Overview(): JSX.Element {
-  const params = useParams();
-  const movies = useAppSelector((state) => state.movies);
-  const film = movies.find((item) => item.id.toString() === params.id) as Film;
-
+  const film = useAppSelector((state) => state.currentFilm);
   const {
-    id,
     description,
     director,
     starring,
@@ -33,25 +27,11 @@ function Overview(): JSX.Element {
 
   return (
     <>
-      <nav className="film-nav film-card__nav">
-        <ul className="film-nav__list">
-          <li className="film-nav__item film-nav__item--active">
-            <Link to='#' className="film-nav__link">Overview</Link>
-          </li>
-          <li className="film-nav__item">
-            <Link to={`/films/${id}/details`} className="film-nav__link">Details</Link>
-          </li>
-          <li className="film-nav__item">
-            <Link to={`/films/${id}/reviews`} className="film-nav__link">Reviews</Link>
-          </li>
-        </ul>
-      </nav>
-
       <div className="film-rating">
         <div className="film-rating__score">{ rating }</div>
         <p className="film-rating__meta">
           <span className="film-rating__level">{ getRatingText(rating) }</span>
-          <span className="film-rating__count">{ ` ${ scoresCount } ratings `}</span>
+          <span className="film-rating__count">{ `${ scoresCount } ratings `}</span>
         </p>
       </div>
 

@@ -1,12 +1,15 @@
-import { useParams} from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import { Film } from '../../types/films';
 import Header from '../../components/header/header';
 import ReviewForm from '../../components/review-form/review-form';
 import { useAppSelector } from '../../hooks';
+import { AppRoute, AuthorizationStatus } from '../../const';
+import { useEffect } from 'react';
 
 function AddReviewScreen(): JSX.Element {
   const params = useParams();
   const movies = useAppSelector((state) => state.movies);
+  const authorizationStatus = useAppSelector((state) => state.authorizationStatus);
   const film = movies.find((item) => item.id.toString() === params.id) as Film;
 
   const {
@@ -16,7 +19,13 @@ function AddReviewScreen(): JSX.Element {
     backgroundImage
   } = film;
 
-  const filmHref = `/films/${id}/`;
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    if (authorizationStatus === AuthorizationStatus.NoAuth) {
+      navigate(`${AppRoute.Films}${id}`);
+    }
+  }, [authorizationStatus]);
 
   return (
     <section className="film-card film-card--full">
@@ -30,7 +39,7 @@ function AddReviewScreen(): JSX.Element {
         <Header
           isIncludeBreadcrumbs
           breadcrumbsItems={[
-            { title: name, href: filmHref },
+            { title: name, href: `${AppRoute.Films}${id}` },
             { title: 'Add review', href: ''}
           ]}
         />
