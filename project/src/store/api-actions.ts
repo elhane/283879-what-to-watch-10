@@ -89,7 +89,7 @@ export const logoutAction = createAsyncThunk<void, undefined, {
   },
 );
 
-export const fetchCurrentFilmAction = createAsyncThunk<void, string | number, {
+export const fetchCurrentFilmAction = createAsyncThunk<void, string | number | undefined, {
   dispatch: AppDispatch,
   state: State,
   extra: AxiosInstance

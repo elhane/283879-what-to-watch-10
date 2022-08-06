@@ -6,6 +6,8 @@ import { useAppSelector } from '../../hooks';
 import { useEffect } from 'react';
 import { AppRoute, AuthorizationStatus } from '../../const';
 import Tabs from '../../components/tabs/tabs';
+import { fetchCurrentFilmAction } from '../../store/api-actions';
+import { useAppDispatch } from '../../hooks';
 
 function FilmScreen(): JSX.Element {
   const params = useParams();
@@ -14,6 +16,7 @@ function FilmScreen(): JSX.Element {
   const film = useAppSelector((state) => state.currentFilm);
   const similarFilms = useAppSelector((state) => state.similarFilms);
   const authorizationStatus = useAppSelector((state) => state.authorizationStatus);
+  // const isDataLoaded = useAppSelector((state) => state.isDataLoaded);
   const filmsIds = movies.map((movie) => movie.id);
 
   const {
@@ -25,10 +28,13 @@ function FilmScreen(): JSX.Element {
     backgroundImage
   } = film;
 
+  console.debug('film screen');
+
   const navigate = useNavigate();
+  const dispatch = useAppDispatch();
 
   const onPlayBtnClickHandler = () => {
-    navigate(`/player/${film.id}`);
+    navigate(`/player/${id}`);
   };
 
   const onMyListBtnClickHandler = () => {
@@ -40,6 +46,20 @@ function FilmScreen(): JSX.Element {
       navigate(AppRoute.NotFound);
     }
   }, [params?.id]);
+
+  useEffect(() => {
+    dispatch(fetchCurrentFilmAction(params?.id));
+  }, []);
+
+  // useEffect(() => {
+  //   let isNeedUpdate = true;
+  //
+  //   if (isNeedUpdate) {
+  //     dispatch(fetchCurrentFilmAction(params?.id));
+  //   }
+  //
+  //   return () => { isNeedUpdate = false; };
+  // }, [params?.id]);
 
   return (
     <>
