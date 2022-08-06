@@ -3,6 +3,7 @@ import { useParams } from 'react-router-dom';
 import { useAppDispatch, useAppSelector } from '../../hooks';
 import { postCommentAction } from '../../store/api-actions';
 import FormError from '../../components/form-error/form-error';
+import { COMMENT_MAX_LENGTH, COMMENT_MIN_LENGTH } from '../../const';
 
 function ReviewForm(): JSX.Element {
   const params = useParams();
@@ -22,15 +23,15 @@ function ReviewForm(): JSX.Element {
 
   const validateTextarea = (value: string) => {
     switch (true) {
-      case value.length < 50:
+      case value.length < COMMENT_MIN_LENGTH:
         setFormErrors({...formErrors, comment: commentValid ? '' : 'too short, the comment must contain at least 50 characters'});
         setCommentValid(false);
         break;
-      case value.length > 400:
+      case value.length > COMMENT_MAX_LENGTH:
         setFormErrors({...formErrors, comment: commentValid ? '' : 'too long, the comment must contain no more than 400 characters'});
         setCommentValid(false);
         break;
-      case value.length > 50 && value.length < 400:
+      case value.length > COMMENT_MIN_LENGTH && value.length < COMMENT_MAX_LENGTH:
         setCommentValid(true);
     }
   };
