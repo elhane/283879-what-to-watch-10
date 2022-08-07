@@ -8,10 +8,16 @@ import {
   setDataLoadedStatus,
   setError,
   setAuthorizationStatus,
-  setUserData
+  setUserData,
+  setCurrentFilm,
+  setSimilarFilms,
+  setFilmReviews,
+  setLoader,
+  setLoadingFailed
 } from './action';
 import { Film, Films } from '../types/films';
 import { UserType } from '../types/user-data';
+import { Comments } from '../types/comments';
 import { AuthorizationStatus, DEFAULT_FILM_GENRE, FILMS_PER_STEP_AMOUNT} from '../const';
 
 type initialStateType = {
@@ -22,9 +28,14 @@ type initialStateType = {
   cardsToShowAmount: number,
   favoritesList: Films,
   isDataLoaded: boolean,
+  isShowLoader: boolean,
+  isLoadingFailed: boolean,
   error: string | null,
   authorizationStatus: AuthorizationStatus,
-  userData: UserType
+  userData: UserType,
+  currentFilm: Film,
+  similarFilms: Films,
+  reviews: Comments
 }
 
 const initialState: initialStateType = {
@@ -53,6 +64,8 @@ const initialState: initialStateType = {
   cardsToShowAmount: FILMS_PER_STEP_AMOUNT,
   favoritesList: [],
   isDataLoaded: false,
+  isShowLoader: false,
+  isLoadingFailed: false,
   error: null,
   authorizationStatus: AuthorizationStatus.Unknown,
   userData: {
@@ -60,7 +73,28 @@ const initialState: initialStateType = {
     email: '',
     id: 0,
     avatarUrl: '',
-  }
+  },
+  currentFilm: {
+    name: '',
+    genre: '',
+    released: 0,
+    id: 0,
+    posterImage: '',
+    previewImage: '',
+    backgroundImage: '',
+    backgroundColor: '',
+    videoLink: '',
+    previewVideoLink: '',
+    description: '',
+    rating: 0,
+    scoresCount: 0,
+    director: '',
+    starring: ['', ''],
+    runTime: 0,
+    isFavorite: false,
+  },
+  similarFilms: [],
+  reviews: []
 };
 
 const reducer = createReducer(initialState, (builder) => {
@@ -85,6 +119,12 @@ const reducer = createReducer(initialState, (builder) => {
     .addCase(setDataLoadedStatus, (state, action) => {
       state.isDataLoaded = action.payload;
     })
+    .addCase(setLoader, (state, action) => {
+      state.isShowLoader = action.payload;
+    })
+    .addCase(setLoadingFailed, (state, action) => {
+      state.isLoadingFailed = action.payload;
+    })
     .addCase(setError, (state, action) => {
       state.error = action.payload;
     })
@@ -93,6 +133,15 @@ const reducer = createReducer(initialState, (builder) => {
     })
     .addCase(setUserData, (state, action) => {
       state.userData = action.payload;
+    })
+    .addCase(setCurrentFilm, (state, action) => {
+      state.currentFilm = action.payload;
+    })
+    .addCase(setSimilarFilms, (state, action) => {
+      state.similarFilms = action.payload;
+    })
+    .addCase(setFilmReviews, (state, action) => {
+      state.reviews = action.payload;
     });
 });
 

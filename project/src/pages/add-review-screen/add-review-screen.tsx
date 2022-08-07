@@ -1,13 +1,15 @@
-import { useParams} from 'react-router-dom';
-import { Film } from '../../types/films';
+import { useParams } from 'react-router-dom';
 import Header from '../../components/header/header';
 import ReviewForm from '../../components/review-form/review-form';
-import { useAppSelector } from '../../hooks';
+import { useAppDispatch, useAppSelector } from '../../hooks';
+import { AppRoute } from '../../const';
+import { useEffect } from 'react';
+import { fetchCurrentFilmAction } from '../../store/api-actions';
 
 function AddReviewScreen(): JSX.Element {
   const params = useParams();
-  const movies = useAppSelector((state) => state.movies);
-  const film = movies.find((item) => item.id.toString() === params.id) as Film;
+  const dispatch = useAppDispatch();
+  const film = useAppSelector((state) => state.currentFilm);
 
   const {
     id,
@@ -16,7 +18,9 @@ function AddReviewScreen(): JSX.Element {
     backgroundImage
   } = film;
 
-  const filmHref = `/films/${id}/`;
+  useEffect(() => {
+    dispatch(fetchCurrentFilmAction(params?.id));
+  }, [dispatch, params?.id]);
 
   return (
     <section className="film-card film-card--full">
@@ -30,7 +34,7 @@ function AddReviewScreen(): JSX.Element {
         <Header
           isIncludeBreadcrumbs
           breadcrumbsItems={[
-            { title: name, href: filmHref },
+            { title: name, href: `${AppRoute.Films}${id}` },
             { title: 'Add review', href: ''}
           ]}
         />
