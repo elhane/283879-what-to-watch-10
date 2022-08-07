@@ -6,18 +6,22 @@ import { useAppSelector } from '../../hooks';
 import { useEffect } from 'react';
 import { AppRoute, AuthorizationStatus } from '../../const';
 import Tabs from '../../components/tabs/tabs';
-import { fetchCurrentFilmAction } from '../../store/api-actions';
+import {
+  fetchCurrentFilmAction,
+  fetchCommentsAction,
+  fetchSimilarFilmsAction
+} from '../../store/api-actions';
 import { useAppDispatch } from '../../hooks';
+import LoadingScreen from '../loading-screen/loading-screen';
 
 function FilmScreen(): JSX.Element {
   const params = useParams();
-  const movies = useAppSelector((state) => state.movies);
   const favoritesList = useAppSelector((state) => state.favoritesList);
   const film = useAppSelector((state) => state.currentFilm);
   const similarFilms = useAppSelector((state) => state.similarFilms);
   const authorizationStatus = useAppSelector((state) => state.authorizationStatus);
-  // const isDataLoaded = useAppSelector((state) => state.isDataLoaded);
-  const filmsIds = movies.map((movie) => movie.id);
+  const isShowLoader = useAppSelector((state) => state.isShowLoader);
+  const isLoadingFailed = useAppSelector((state) => state.isLoadingFailed);
 
   const {
     id,
@@ -27,8 +31,6 @@ function FilmScreen(): JSX.Element {
     released,
     backgroundImage
   } = film;
-
-  console.debug('film screen');
 
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
@@ -42,33 +44,25 @@ function FilmScreen(): JSX.Element {
   };
 
   useEffect(() => {
-    if (!filmsIds.includes(Number(params?.id))) {
+    if (isLoadingFailed) {
       navigate(AppRoute.NotFound);
     }
-  }, [params?.id]);
+  }, [isLoadingFailed]);
 
   useEffect(() => {
     dispatch(fetchCurrentFilmAction(params?.id));
-  }, []);
-
-  // useEffect(() => {
-  //   let isNeedUpdate = true;
-  //
-  //   if (isNeedUpdate) {
-  //     dispatch(fetchCurrentFilmAction(params?.id));
-  //   }
-  //
-  //   return () => { isNeedUpdate = false; };
-  // }, [params?.id]);
+    dispatch(fetchSimilarFilmsAction(params?.id));
+    dispatch(fetchCommentsAction(params?.id));
+  }, [dispatch, params?.id]);
 
   return (
     <>
+      { isShowLoader ? <LoadingScreen /> : '' }
       <section className="film-card film-card--full">
         <div className="film-card__hero">
           <div className="film-card__bg">
             <img src={ backgroundImage } alt={ name }/>
           </div>
-
           <h1 className="visually-hidden">WTW</h1>
 
           <Header extraClasses={ 'film-card__head' }/>
@@ -112,7 +106,6 @@ function FilmScreen(): JSX.Element {
             <div className="film-card__desc">
               <Tabs />
             </div>
-
           </div>
         </div>
       </section>

@@ -3,12 +3,15 @@ import Header from '../../components/header/header';
 import { useNavigate } from 'react-router-dom';
 import GenresTabs from '../../components/genres-tabs/genres-tabs';
 import FilmsList from '../../components/films-list/films-list';
-import { useAppSelector } from '../../hooks';
+import { useAppDispatch, useAppSelector } from '../../hooks';
+import { useEffect } from 'react';
+import { fetchFilmsAction } from '../../store/api-actions';
 
 function FirstScreen(): JSX.Element {
   const favoritesList = useAppSelector((state) => state.favoritesList);
   const promoFilm = useAppSelector((state) => state.promoFilm);
   const navigate = useNavigate();
+  const dispatch = useAppDispatch();
 
   const onPlayBtnClickHandler = () => {
     navigate('/player/1');
@@ -17,6 +20,10 @@ function FirstScreen(): JSX.Element {
   const onMyListBtnClickHandler = () => {
     //callback для добавления фильма в список?
   };
+
+  useEffect(() => {
+    dispatch(fetchFilmsAction());
+  }, []);
 
   return (
     <>

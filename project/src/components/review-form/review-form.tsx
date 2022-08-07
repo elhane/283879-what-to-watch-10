@@ -1,7 +1,8 @@
+import React from 'react';
 import { useState, ChangeEvent, FormEvent, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { useAppDispatch, useAppSelector } from '../../hooks';
-import { postCommentAction } from '../../store/api-actions';
+import { fetchCommentsAction, postCommentAction } from '../../store/api-actions';
 import FormError from '../../components/form-error/form-error';
 import { COMMENT_MAX_LENGTH, COMMENT_MIN_LENGTH } from '../../const';
 
@@ -70,6 +71,7 @@ function ReviewForm(): JSX.Element {
 
     if (formValid) {
       dispatch(postCommentAction([filmId, formData]));
+      dispatch(fetchCommentsAction(filmId));
     }
   };
 
@@ -89,7 +91,7 @@ function ReviewForm(): JSX.Element {
             const keyValue = 10 - index;
 
             return (
-              <>
+              <React.Fragment key={ keyValue }>
                 <input
                   className="rating__input"
                   id={ `star-${keyValue}` }
@@ -97,16 +99,14 @@ function ReviewForm(): JSX.Element {
                   name="rating"
                   value={ keyValue }
                   onChange={ fieldChangeHandle }
-                  key={ keyValue }
                 />
                 <label
                   className="rating__label"
                   htmlFor={`star-${ keyValue }`}
-                  key={ `label${keyValue}` }
                 >
                   Rating { keyValue }
                 </label>
-              </>
+              </React.Fragment>
             );
           }
           )}

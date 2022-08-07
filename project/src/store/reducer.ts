@@ -11,7 +11,9 @@ import {
   setUserData,
   setCurrentFilm,
   setSimilarFilms,
-  setFilmReviews
+  setFilmReviews,
+  setLoader,
+  setLoadingFailed
 } from './action';
 import { Film, Films } from '../types/films';
 import { UserType } from '../types/user-data';
@@ -26,6 +28,8 @@ type initialStateType = {
   cardsToShowAmount: number,
   favoritesList: Films,
   isDataLoaded: boolean,
+  isShowLoader: boolean,
+  isLoadingFailed: boolean,
   error: string | null,
   authorizationStatus: AuthorizationStatus,
   userData: UserType,
@@ -60,6 +64,8 @@ const initialState: initialStateType = {
   cardsToShowAmount: FILMS_PER_STEP_AMOUNT,
   favoritesList: [],
   isDataLoaded: false,
+  isShowLoader: false,
+  isLoadingFailed: false,
   error: null,
   authorizationStatus: AuthorizationStatus.Unknown,
   userData: {
@@ -112,6 +118,12 @@ const reducer = createReducer(initialState, (builder) => {
     })
     .addCase(setDataLoadedStatus, (state, action) => {
       state.isDataLoaded = action.payload;
+    })
+    .addCase(setLoader, (state, action) => {
+      state.isShowLoader = action.payload;
+    })
+    .addCase(setLoadingFailed, (state, action) => {
+      state.isLoadingFailed = action.payload;
     })
     .addCase(setError, (state, action) => {
       state.error = action.payload;

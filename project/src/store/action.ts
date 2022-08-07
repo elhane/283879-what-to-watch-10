@@ -18,6 +18,10 @@ export const loadFilms = createAction<Films>('data/loadFilms');
 
 export const setDataLoadedStatus = createAction<boolean>('data/setDataLoadedStatus');
 
+export const setLoader = createAction<boolean>('data/setLoader');
+
+export const setLoadingFailed = createAction<boolean>('data/setLoadingFailed');
+
 export const setError = createAction<string | null>('main/setError');
 
 export const setAuthorizationStatus = createAction<AuthorizationStatus>('user/setAuthorizationStatus');

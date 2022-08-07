@@ -1,16 +1,15 @@
-import { useNavigate, useParams } from 'react-router-dom';
-import { Film } from '../../types/films';
+import { useParams } from 'react-router-dom';
 import Header from '../../components/header/header';
 import ReviewForm from '../../components/review-form/review-form';
-import { useAppSelector } from '../../hooks';
-import { AppRoute, AuthorizationStatus } from '../../const';
+import { useAppDispatch, useAppSelector } from '../../hooks';
+import { AppRoute } from '../../const';
 import { useEffect } from 'react';
+import { fetchCurrentFilmAction } from '../../store/api-actions';
 
 function AddReviewScreen(): JSX.Element {
   const params = useParams();
-  const movies = useAppSelector((state) => state.movies);
-  const authorizationStatus = useAppSelector((state) => state.authorizationStatus);
-  const film = movies.find((item) => item.id.toString() === params.id) as Film;
+  const dispatch = useAppDispatch();
+  const film = useAppSelector((state) => state.currentFilm);
 
   const {
     id,
@@ -19,13 +18,9 @@ function AddReviewScreen(): JSX.Element {
     backgroundImage
   } = film;
 
-  const navigate = useNavigate();
-
   useEffect(() => {
-    if (authorizationStatus === AuthorizationStatus.NoAuth) {
-      navigate(`${AppRoute.Films}${id}`);
-    }
-  }, [authorizationStatus]);
+    dispatch(fetchCurrentFilmAction(params?.id));
+  }, [dispatch, params?.id]);
 
   return (
     <section className="film-card film-card--full">
