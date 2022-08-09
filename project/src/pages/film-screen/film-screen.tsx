@@ -18,8 +18,8 @@ import {
   getFavoritesList,
   getSimilarFilms
 } from '../../store/film-process/selectors';
-import {getAuthorizationStatus} from '../../store/user-process/selectors';
-import {getLoaderStatus, getLoadingFailedStatus} from '../../store/films-data/selectors';
+import { getAuthorizationStatus} from '../../store/user-process/selectors';
+import { getLoaderStatus, getLoadingFailedStatus } from '../../store/film-process/selectors';
 
 function FilmScreen(): JSX.Element {
   const params = useParams();

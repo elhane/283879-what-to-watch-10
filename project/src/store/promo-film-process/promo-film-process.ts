@@ -1,7 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit';
 import { NameSpace } from '../../const';
 import { PromoFilmProcess } from '../../types/state';
-import {fetchPromoFilmAction} from '../api-actions';
+import { fetchPromoFilmAction } from '../api-actions';
 
 const initialState: PromoFilmProcess = {
   promoFilm: {

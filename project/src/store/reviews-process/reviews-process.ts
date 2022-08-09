@@ -7,7 +7,6 @@ const initialState: ReviewsProcess = {
   reviews: [],
   isShowLoader: false,
   isLoadingFailed: false,
-  isDataLoaded: false,
 };
 
 export const reviewsProcess = createSlice({
@@ -29,13 +28,13 @@ export const reviewsProcess = createSlice({
         state.isLoadingFailed = true;
       })
       .addCase(postCommentAction.pending, (state) => {
-        state.isDataLoaded = true;
+        state.isShowLoader = true;
       })
       .addCase(postCommentAction.fulfilled, (state) => {
-        state.isDataLoaded = false;
+        state.isShowLoader = false;
       })
       .addCase(postCommentAction.rejected, (state) => {
-        state.isDataLoaded = false;
+        state.isShowLoader = false;
       });
   }
 });

@@ -7,8 +7,6 @@ const initialState: FilmsData = {
   movies: [],
   genresList: [],
   isDataLoaded: false,
-  isShowLoader: false,
-  isLoadingFailed: false
 };
 
 export const filmsData = createSlice({

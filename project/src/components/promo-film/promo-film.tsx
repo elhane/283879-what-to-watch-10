@@ -1,8 +1,8 @@
 import Header from '../header/header';
 import { useAppSelector } from '../../hooks';
 import { useNavigate } from 'react-router-dom';
-import {getFavoritesList} from '../../store/film-process/selectors';
-import {getPromoFilm} from '../../store/promo-film-process/selectors';
+import { getFavoritesList } from '../../store/film-process/selectors';
+import { getPromoFilm } from '../../store/promo-film-process/selectors';
 
 function PromoFilm(): JSX.Element {
   const favoritesList = useAppSelector(getFavoritesList);

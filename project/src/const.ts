@@ -40,7 +40,7 @@ export const COMMENT_MAX_LENGTH = 400;
 
 export enum NameSpace {
   User = 'USER',
-  Data = 'FILMS_DATA',
+  Data = 'DATA',
   Film = 'FILM',
   PromoFilm = 'PROMO_FILM',
   Reviews = 'REVIEWS',

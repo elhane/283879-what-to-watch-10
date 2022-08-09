@@ -33,38 +33,38 @@ function App(): JSX.Element {
           path={ AppRoute.Root }
           element={ <FirstScreen /> }
         />
-        <Route
-          path={ AppRoute.Login }
-          element={ <AuthScreen /> }
-        />
-        <Route
-          path={ AppRoute.FilmsList }
-          element={
-            <PrivateRoute authorizationStatus={ authorizationStatus } >
-              <FilmsListScreen />
-            </PrivateRoute>
-          }
-        />
+        {/*<Route*/}
+        {/*  path={ AppRoute.Login }*/}
+        {/*  element={ <AuthScreen /> }*/}
+        {/*/>*/}
+        {/*<Route*/}
+        {/*  path={ AppRoute.FilmsList }*/}
+        {/*  element={*/}
+        {/*    <PrivateRoute authorizationStatus={ authorizationStatus } >*/}
+        {/*      <FilmsListScreen />*/}
+        {/*    </PrivateRoute>*/}
+        {/*  }*/}
+        {/*/>*/}
 
-        <Route path={ AppRoute.Film } element={ <FilmScreen /> }></Route>
+        {/*<Route path={ AppRoute.Film } element={ <FilmScreen /> }></Route>*/}
 
-        <Route
-          path={ AppRoute.AddReview }
-          element={
-            <PrivateRoute authorizationStatus={ authorizationStatus } >
-              <AddReviewScreen />
-            </PrivateRoute>
-          }
-        />
+        {/*<Route*/}
+        {/*  path={ AppRoute.AddReview }*/}
+        {/*  element={*/}
+        {/*    <PrivateRoute authorizationStatus={ authorizationStatus } >*/}
+        {/*      <AddReviewScreen />*/}
+        {/*    </PrivateRoute>*/}
+        {/*  }*/}
+        {/*/>*/}
 
-        <Route
-          path={ AppRoute.Player }
-          element={ <PlayerScreen /> }
-        />
-        <Route
-          path="*"
-          element={ <NotFoundScreen /> }
-        />
+        {/*<Route*/}
+        {/*  path={ AppRoute.Player }*/}
+        {/*  element={ <PlayerScreen /> }*/}
+        {/*/>*/}
+        {/*<Route*/}
+        {/*  path="*"*/}
+        {/*  element={ <NotFoundScreen /> }*/}
+        {/*/>*/}
       </Routes>
     </HistoryRouter>
   );

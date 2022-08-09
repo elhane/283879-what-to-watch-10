@@ -11,6 +11,18 @@ import { APIRoute, AppRoute, TIMEOUT_SHOW_ERROR } from '../const';
 import { store } from './';
 import { CommentData, Comments } from '../types/comments';
 
+export const checkAuthAction = createAsyncThunk<UserType, undefined, {
+  dispatch: AppDispatch,
+  state: State,
+  extra: AxiosInstance
+}>(
+  'user/checkAuth',
+  async (_arg, {extra: api}) => {
+    const {data: { name, email, id, avatarUrl }} = await api.get(APIRoute.Login);
+    return { name, email, id, avatarUrl };
+  },
+);
+
 export const clearErrorAction = createAsyncThunk(
   'user/clearError',
   () => {
@@ -27,21 +39,9 @@ export const fetchFilmsAction = createAsyncThunk<Films, undefined, {
   extra: AxiosInstance
 }>(
   'data/fetchFilms',
-  async (_arg, {dispatch, extra: api}) => {
+  async (_arg, {extra: api}) => {
     const {data} = await api.get<Films>(APIRoute.Films);
     return data;
-  },
-);
-
-export const checkAuthAction = createAsyncThunk<UserType, undefined, {
-  dispatch: AppDispatch,
-  state: State,
-  extra: AxiosInstance
-}>(
-  'user/checkAuth',
-  async (_arg, {dispatch, extra: api}) => {
-    const {data: { name, email, id, avatarUrl }} = await api.get(APIRoute.Login);
-    return { name, email, id, avatarUrl };
   },
 );
 
@@ -65,7 +65,7 @@ export const logoutAction = createAsyncThunk<void, undefined, {
   extra: AxiosInstance
 }>(
   'user/logout',
-  async (_arg, {dispatch, extra: api}) => {
+  async (_arg, {extra: api}) => {
     await api.delete(APIRoute.Logout);
     dropToken();
   },
@@ -77,7 +77,7 @@ export const fetchCurrentFilmAction = createAsyncThunk<Film, string | undefined,
   extra: AxiosInstance
 }>(
   'film/fetchCurrentFilmAction',
-  async (id, {dispatch, extra: api}) => {
+  async (id, {extra: api}) => {
     const {data} = await api.get<Film>(`${APIRoute.Films}/${id}`);
     return data;
   },
@@ -101,7 +101,7 @@ export const fetchCommentsAction = createAsyncThunk<Comments, string | undefined
   extra: AxiosInstance
 }>(
   'reviews/fetchCommentsAction',
-  async (id, {dispatch, extra: api}) => {
+  async (id, {extra: api}) => {
     const {data} = await api.get<Comments>(`${APIRoute.Comments}/${id}`);
     return data;
   },

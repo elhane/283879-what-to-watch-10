@@ -10,19 +10,19 @@ function FirstScreen(): JSX.Element {
   const dispatch = useAppDispatch();
 
   useEffect(() => {
-    dispatch(fetchFilmsAction());
+    // dispatch(fetchFilmsAction());
   }, []);
 
   return (
     <>
-      <PromoFilm />
+      {/*<PromoFilm />*/}
 
       <div className="page-content">
         <section className="catalog">
           <h2 className="catalog__title visually-hidden">Catalog</h2>
 
-          <GenresTabs />
-          <FilmsList />
+          {/*<GenresTabs />*/}
+          {/*<FilmsList />*/}
         </section>
 
         <Footer />

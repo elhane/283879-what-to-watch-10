@@ -27,9 +27,9 @@ const initialState: FilmProcess = {
     isFavorite: false,
   },
   similarFilms: [],
-  isDataLoaded: false,
   isShowLoader: false,
-  isLoadingFailed: false
+  isLoadingFailed: false,
+  isDataLoaded: false,
 };
 
 export const filmProcess = createSlice({
@@ -76,6 +76,5 @@ export const filmProcess = createSlice({
       });
   }
 });
-
 
 export const { showMoreCards, resetCardsToShowAmount, setActiveGenre, resetFilmCards } = filmProcess.actions;
