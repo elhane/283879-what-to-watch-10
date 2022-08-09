@@ -17,7 +17,11 @@ const initialState: UserProcess = {
 export const userProcess = createSlice({
   name: NameSpace.User,
   initialState,
-  reducers: {},
+  reducers: {
+    setError: (state, action) => {
+      state.error = action.payload;
+    }
+  },
   extraReducers(builder) {
     builder
       .addCase(checkAuthAction.fulfilled, (state, action) => {
@@ -39,3 +43,5 @@ export const userProcess = createSlice({
       });
   }
 });
+
+export const { setError } = userProcess.actions;

@@ -3,7 +3,7 @@ import FilmCard from '../film-card/film-card';
 import { DEFAULT_FILM_GENRE } from '../../const';
 import { useAppDispatch, useAppSelector } from '../../hooks';
 import ShowMoreButton from '../show-more-button/show-more-button';
-import { resetFilmCards } from '../../store/action';
+import { resetFilmCards } from '../../store/film-process/film-process';
 import {getFilms} from '../../store/films-data/selectors';
 import {getActiveGenre, getCardsToShowAmount} from '../../store/film-process/selectors';
 

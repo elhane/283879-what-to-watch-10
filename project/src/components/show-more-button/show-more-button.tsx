@@ -1,5 +1,5 @@
 import { useAppDispatch } from '../../hooks';
-import { showMoreCards } from '../../store/action';
+import { showMoreCards } from '../../store/film-process/film-process';
 
 function ShowMoreButton(): JSX.Element {
   const dispatch = useAppDispatch();

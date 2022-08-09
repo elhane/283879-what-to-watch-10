@@ -1,7 +1,7 @@
 import './genre-tabs.css';
 import React from 'react';
 import { useAppDispatch, useAppSelector } from '../../hooks';
-import { resetCardsToShowAmount, setActiveGenre } from '../../store/action';
+import { resetCardsToShowAmount, setActiveGenre } from '../../store/film-process/film-process';
 import { getActiveGenre } from '../../store/film-process/selectors';
 import { getGenresList } from '../../store/films-data/selectors';
 
