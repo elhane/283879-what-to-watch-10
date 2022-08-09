@@ -2,6 +2,7 @@ import { Link } from 'react-router-dom';
 import { useAppDispatch, useAppSelector } from '../../hooks';
 import { logoutAction } from '../../store/api-actions';
 import { AppRoute, AuthorizationStatus } from '../../const';
+import {getAuthorizationStatus, getUserData} from '../../store/user-process/selectors';
 
 type breadcrumbsItem = {
   title: string
@@ -27,8 +28,8 @@ function Header({
 }: HeaderProps): JSX.Element {
 
   const dispatch = useAppDispatch();
-  const authorizationStatus = useAppSelector((state) => state.authorizationStatus);
-  const userData = useAppSelector((state) => state.userData);
+  const authorizationStatus = useAppSelector(getAuthorizationStatus);
+  const userData = useAppSelector(getUserData);
 
   return (
     <header className={`page-header ${ extraClasses }`}>

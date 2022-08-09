@@ -2,8 +2,6 @@ import { Link } from 'react-router-dom';
 import VideoPlayer from '../video-player/video-player';
 import { useState, useRef } from 'react';
 import { AppRoute } from '../../const';
-// import { fetchCurrentFilmAction } from '../../store/api-actions';
-// import { useAppDispatch } from '../../hooks';
 
 type FilmCardProps = {
   id: number,
@@ -18,7 +16,6 @@ function FilmCard(props: FilmCardProps): JSX.Element {
   const { id, previewImage, name, isActive, makeCardActive, previewVideoLink } = props;
   const [isShowVideo, setIsShowVideo] = useState(false);
   const timerRef = useRef(0);
-  // const dispatch = useAppDispatch();
 
   const onMouseOverHandle = () => {
     makeCardActive(id);
@@ -30,10 +27,6 @@ function FilmCard(props: FilmCardProps): JSX.Element {
     setIsShowVideo(false);
     clearTimeout(timerRef.current);
   };
-  //
-  // const handleMouseCLick = async () => {
-  //   await dispatch(fetchCurrentFilmAction(id));
-  // };
 
   return (
     <article

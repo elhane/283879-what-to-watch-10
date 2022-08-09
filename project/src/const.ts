@@ -23,7 +23,8 @@ export enum APIRoute {
   Films = '/films',
   Login = '/login',
   Logout = '/logout',
-  Comments = '/comments'
+  Comments = '/comments',
+  Promo = '/promo'
 }
 
 export const TIMEOUT_SHOW_ERROR = 3000;
@@ -36,3 +37,11 @@ export enum TabsNames {
 
 export const COMMENT_MIN_LENGTH = 50;
 export const COMMENT_MAX_LENGTH = 400;
+
+export enum NameSpace {
+  User = 'USER',
+  Data = 'FILMS_DATA',
+  Film = 'FILM',
+  PromoFilm = 'PROMO_FILM',
+  Reviews = 'REVIEWS',
+}

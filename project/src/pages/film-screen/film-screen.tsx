@@ -13,15 +13,22 @@ import {
 } from '../../store/api-actions';
 import { useAppDispatch } from '../../hooks';
 import LoadingScreen from '../loading-screen/loading-screen';
+import {
+  getCurrentFilm,
+  getFavoritesList,
+  getSimilarFilms
+} from '../../store/film-process/selectors';
+import {getAuthorizationStatus} from '../../store/user-process/selectors';
+import {getLoaderStatus, getLoadingFailedStatus} from '../../store/films-data/selectors';
 
 function FilmScreen(): JSX.Element {
   const params = useParams();
-  const favoritesList = useAppSelector((state) => state.favoritesList);
-  const film = useAppSelector((state) => state.currentFilm);
-  const similarFilms = useAppSelector((state) => state.similarFilms);
-  const authorizationStatus = useAppSelector((state) => state.authorizationStatus);
-  const isShowLoader = useAppSelector((state) => state.isShowLoader);
-  const isLoadingFailed = useAppSelector((state) => state.isLoadingFailed);
+  const favoritesList = useAppSelector(getFavoritesList);
+  const film = useAppSelector(getCurrentFilm);
+  const similarFilms = useAppSelector(getSimilarFilms);
+  const authorizationStatus = useAppSelector(getAuthorizationStatus);
+  const isShowLoader = useAppSelector(getLoaderStatus);
+  const isLoadingFailed = useAppSelector(getLoadingFailedStatus);
 
   const {
     id,

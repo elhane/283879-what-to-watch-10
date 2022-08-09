@@ -5,6 +5,7 @@ import { useAppDispatch, useAppSelector } from '../../hooks';
 import { fetchCommentsAction, postCommentAction } from '../../store/api-actions';
 import FormError from '../../components/form-error/form-error';
 import { COMMENT_MAX_LENGTH, COMMENT_MIN_LENGTH } from '../../const';
+import { getDataLoadedStatus } from '../../store/films-data/selectors';
 
 function ReviewForm(): JSX.Element {
   const params = useParams();
@@ -20,7 +21,7 @@ function ReviewForm(): JSX.Element {
   const [commentValid, setCommentValid] = useState(true);
   const [ratingValid, setRatingValid] = useState(true);
 
-  const isDataLoaded = useAppSelector((state) => state.isDataLoaded);
+  const isDataLoaded = useAppSelector(getDataLoadedStatus);
 
   const validateTextarea = (value: string) => {
     switch (true) {

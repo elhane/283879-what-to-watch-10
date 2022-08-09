@@ -1,17 +1,14 @@
-import { useParams, useNavigate } from 'react-router-dom';
-import { Film } from '../../types/films';
+import { useNavigate } from 'react-router-dom';
 import { useAppSelector } from '../../hooks';
+import { getCurrentFilm } from '../../store/film-process/selectors';
 
 function PlayerScreen(): JSX.Element {
   const navigate = useNavigate();
-  const params = useParams();
-  const movies = useAppSelector((state) => state.movies);
-
-  const film = movies.find((item) => item.id.toString() === params.id) as Film;
-  const { videoLink, previewImage } = film;
+  const film = useAppSelector(getCurrentFilm);
+  const { videoLink, previewImage, id } = film;
 
   const onExitBtnClickHandler = () => {
-    navigate(`/films/${film.id}`);
+    navigate(`/films/${id}`);
   };
 
   return (
