@@ -17,7 +17,7 @@ function PlayerScreen(): JSX.Element {
 
   return (
     <div className="player">
-      <VideoPlayer src={videoLink} isMute videoPosterImage={previewImage} isShowVideo className={'player__video'} hasControls={true}/>
+      <VideoPlayer src={videoLink} isMute videoPosterImage={previewImage} isShowVideo className={'player__video'} hasControls/>
 
       <button type="button" className="player__exit" onClick={ onExitBtnClickHandler }>Exit</button>
 
