@@ -6,7 +6,7 @@ import { fetchFilmsAction } from '../api-actions';
 const initialState: FilmsData = {
   movies: [],
   genresList: [],
-  isDataLoaded: false,
+  isShowLoader: false,
 };
 
 export const filmsData = createSlice({
@@ -16,12 +16,12 @@ export const filmsData = createSlice({
   extraReducers(builder) {
     builder
       .addCase(fetchFilmsAction.pending, (state) => {
-        state.isDataLoaded = true;
+        state.isShowLoader = true;
       })
       .addCase(fetchFilmsAction.fulfilled, (state, action) => {
         state.movies = action.payload;
         state.genresList = [ DEFAULT_FILM_GENRE, ...Array.from(new Set(action.payload.map((film) => film.genre))).sort()];
-        state.isDataLoaded = false;
+        state.isShowLoader = false;
       });
   }
 });

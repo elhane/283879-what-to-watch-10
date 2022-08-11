@@ -36,7 +36,8 @@ function FilmScreen(): JSX.Element {
     genre,
     posterImage,
     released,
-    backgroundImage
+    backgroundImage,
+    backgroundColor
   } = film;
 
   const navigate = useNavigate();
@@ -65,7 +66,7 @@ function FilmScreen(): JSX.Element {
   return (
     <>
       { isShowLoader ? <LoadingScreen /> : '' }
-      <section className="film-card film-card--full">
+      <section className="film-card film-card--full" style={{ backgroundColor: backgroundColor }}>
         <div className="film-card__hero">
           <div className="film-card__bg">
             <img src={ backgroundImage } alt={ name }/>

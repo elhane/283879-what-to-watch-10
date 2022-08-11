@@ -23,7 +23,7 @@ const initialState: PromoFilmProcess = {
     runTime: 123,
     isFavorite: true,
   },
-  isDataLoaded: false,
+  isShowLoader: false
 };
 
 export const promoFilmProcess = createSlice({
@@ -33,10 +33,11 @@ export const promoFilmProcess = createSlice({
   extraReducers(builder) {
     builder
       .addCase(fetchPromoFilmAction.pending, (state) => {
-        state.isDataLoaded = true;
+        state.isShowLoader = true;
       })
       .addCase(fetchPromoFilmAction.fulfilled, (state, action) => {
         state.promoFilm = action.payload;
+        state.isShowLoader = false;
       });
   }
 });

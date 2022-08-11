@@ -29,7 +29,6 @@ const initialState: FilmProcess = {
   similarFilms: [],
   isShowLoader: false,
   isLoadingFailed: false,
-  isDataLoaded: false,
 };
 
 export const filmProcess = createSlice({

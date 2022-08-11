@@ -13,7 +13,7 @@ export type UserProcess = {
 export type FilmsData = {
   movies: Films,
   genresList: string[],
-  isDataLoaded: boolean,
+  isShowLoader: boolean,
 }
 
 export type FilmProcess = {
@@ -24,12 +24,11 @@ export type FilmProcess = {
   similarFilms: Films,
   isShowLoader: boolean,
   isLoadingFailed: boolean,
-  isDataLoaded: boolean,
 }
 
 export type PromoFilmProcess = {
   promoFilm: Film,
-  isDataLoaded: boolean,
+  isShowLoader: boolean,
 }
 
 export type ReviewsProcess = {

@@ -5,7 +5,8 @@ import { useAppDispatch, useAppSelector } from '../../hooks';
 import { fetchCommentsAction, postCommentAction } from '../../store/api-actions';
 import FormError from '../../components/form-error/form-error';
 import { COMMENT_MAX_LENGTH, COMMENT_MIN_LENGTH } from '../../const';
-import { getDataLoadedStatus } from '../../store/films-data/selectors';
+import { getLoadingFailedStatus,getLoaderStatus } from '../../store/reviews-process/selectors';
+import LoadingScreen from '../../pages/loading-screen/loading-screen';
 
 function ReviewForm(): JSX.Element {
   const params = useParams();
@@ -15,13 +16,12 @@ function ReviewForm(): JSX.Element {
     comment: '',
     rating: 0
   });
-
   const [formValid, setFormValid] = useState(true);
   const [formErrors, setFormErrors] = useState({comment: '', rating: ''});
   const [commentValid, setCommentValid] = useState(true);
   const [ratingValid, setRatingValid] = useState(true);
-
-  const isDataLoaded = useAppSelector(getDataLoadedStatus);
+  const isLoadingFailed = useAppSelector(getLoadingFailedStatus);
+  const isShowLoader = useAppSelector(getLoaderStatus);
 
   const validateTextarea = (value: string) => {
     switch (true) {
@@ -85,52 +85,55 @@ function ReviewForm(): JSX.Element {
   }, [formData]);
 
   return (
-    <form action="#" className="add-review__form" onSubmit={handleSubmitForm} >
-      <div className="rating">
-        <div className="rating__stars">
-          { Array.from({ length: 10 }, (v, k) => k).map((index) => {
-            const keyValue = 10 - index;
+    <>
+      { isShowLoader ? <LoadingScreen /> : '' }
+      <form action="#" className="add-review__form" onSubmit={handleSubmitForm} >
+        <div className="rating">
+          <div className="rating__stars">
+            { Array.from({ length: 10 }, (v, k) => k).map((index) => {
+              const keyValue = 10 - index;
 
-            return (
-              <React.Fragment key={ keyValue }>
-                <input
-                  className="rating__input"
-                  id={ `star-${keyValue}` }
-                  type="radio"
-                  name="rating"
-                  value={ keyValue }
-                  onChange={ fieldChangeHandle }
-                />
-                <label
-                  className="rating__label"
-                  htmlFor={`star-${ keyValue }`}
-                >
-                  Rating { keyValue }
-                </label>
-              </React.Fragment>
-            );
-          }
-          )}
+              return (
+                <React.Fragment key={ keyValue }>
+                  <input
+                    className="rating__input"
+                    id={ `star-${keyValue}` }
+                    type="radio"
+                    name="rating"
+                    value={ keyValue }
+                    onChange={ fieldChangeHandle }
+                  />
+                  <label
+                    className="rating__label"
+                    htmlFor={`star-${ keyValue }`}
+                  >
+                    Rating { keyValue }
+                  </label>
+                </React.Fragment>
+              );
+            }
+            )}
+          </div>
         </div>
-      </div>
-      {!ratingValid ? <FormError error={ formErrors.rating } /> : ''}
+        {!ratingValid ? <FormError error={ formErrors.rating } /> : ''}
 
-      <div className="add-review__text">
-        <textarea
-          className="add-review__textarea"
-          name="comment"
-          id="review-text"
-          placeholder="Review text"
-          onChange={ fieldChangeHandle }
-        >
-        </textarea>
+        <div className="add-review__text">
+          <textarea
+            className="add-review__textarea"
+            name="comment"
+            id="review-text"
+            placeholder="Review text"
+            onChange={ fieldChangeHandle }
+          >
+          </textarea>
 
-        <div className="add-review__submit">
-          <button className="add-review__btn" type="submit" disabled={!formValid || isDataLoaded}>Post</button>
+          <div className="add-review__submit">
+            <button className="add-review__btn" type="submit" disabled={!formValid || isLoadingFailed}>Post</button>
+          </div>
         </div>
-      </div>
-      {!commentValid ? <FormError error={ formErrors.comment } /> : ''}
-    </form>
+        {!commentValid ? <FormError error={ formErrors.comment } /> : ''}
+      </form>
+    </>
   );
 }
 

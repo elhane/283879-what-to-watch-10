@@ -4,11 +4,10 @@ import App from './components/app/app';
 import SvgSprite from './components/svg-sprite/svg-sprite';
 import { Provider } from 'react-redux';
 import { store } from './store';
-import {checkAuthAction, fetchFilmsAction} from './store/api-actions';
+import { checkAuthAction } from './store/api-actions';
 import ErrorMessage from './components/error-message/error-message';
 
 store.dispatch(checkAuthAction());
-store.dispatch(fetchFilmsAction());// для теста
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement,

@@ -5,10 +5,8 @@ import { Film, Films } from '../types/films';
 import { UserData, UserType } from '../types/user-data';
 import { AuthData } from '../types/auth-data';
 import { redirectToRoute } from './action';
-import { setError } from './user-process/user-process';
 import { dropToken, saveToken } from '../services/token';
-import { APIRoute, AppRoute, TIMEOUT_SHOW_ERROR } from '../const';
-import { store } from './';
+import { APIRoute, AppRoute } from '../const';
 import { CommentData, Comments } from '../types/comments';
 
 export const checkAuthAction = createAsyncThunk<UserType, undefined, {
@@ -20,16 +18,6 @@ export const checkAuthAction = createAsyncThunk<UserType, undefined, {
   async (_arg, {extra: api}) => {
     const {data: { name, email, id, avatarUrl }} = await api.get(APIRoute.Login);
     return { name, email, id, avatarUrl };
-  },
-);
-
-export const clearErrorAction = createAsyncThunk(
-  'user/clearError',
-  () => {
-    setTimeout(
-      () => store.dispatch(setError(null)),
-      TIMEOUT_SHOW_ERROR,
-    );
   },
 );
 
