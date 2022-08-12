@@ -1,9 +1,10 @@
 import { Comments } from '../../types/comments';
 import { useAppSelector } from '../../hooks';
 import Review from '../review/review';
+import { getReviews } from '../../store/reviews-process/selectors';
 
 function Reviews(): JSX.Element {
-  const reviews = useAppSelector((state) => state.reviews);
+  const reviews = useAppSelector(getReviews);
   let firstCol: Comments = [];
   let secondCol: Comments = [];
 

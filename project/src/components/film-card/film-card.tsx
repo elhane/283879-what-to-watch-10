@@ -2,42 +2,35 @@ import { Link } from 'react-router-dom';
 import VideoPlayer from '../video-player/video-player';
 import { useState, useRef } from 'react';
 import { AppRoute } from '../../const';
-// import { fetchCurrentFilmAction } from '../../store/api-actions';
-// import { useAppDispatch } from '../../hooks';
 
 type FilmCardProps = {
   id: number,
   previewImage: string,
   name: string,
-  isActive: boolean,
-  makeCardActive: (id: number) => void,
   previewVideoLink: string
 };
 
 function FilmCard(props: FilmCardProps): JSX.Element {
-  const { id, previewImage, name, isActive, makeCardActive, previewVideoLink } = props;
+  const { id, previewImage, name, previewVideoLink } = props;
   const [isShowVideo, setIsShowVideo] = useState(false);
   const timerRef = useRef(0);
-  // const dispatch = useAppDispatch();
+  const [isCardActive, setIsCardActive] = useState(false);
 
   const onMouseOverHandle = () => {
-    makeCardActive(id);
+    setIsCardActive(true);
     timerRef.current = window.setTimeout(() => setIsShowVideo(true),
       1000);
   };
 
   const onMouseOutHandle = () => {
+    setIsCardActive(false);
     setIsShowVideo(false);
     clearTimeout(timerRef.current);
   };
-  //
-  // const handleMouseCLick = async () => {
-  //   await dispatch(fetchCurrentFilmAction(id));
-  // };
 
   return (
     <article
-      className={`small-film-card catalog__films-card ${ isActive ? 'active' : ''}` }
+      className={`small-film-card catalog__films-card ${ isCardActive ? 'active' : ''}` }
       onMouseOver={ onMouseOverHandle }
       onMouseOut={ onMouseOutHandle }
     >
@@ -46,7 +39,7 @@ function FilmCard(props: FilmCardProps): JSX.Element {
           <VideoPlayer
             src={ previewVideoLink }
             videoPosterImage={ previewImage }
-            isShowVideo={ isActive && isShowVideo }
+            isShowVideo={ isCardActive && isShowVideo }
             isMute
           />
         }

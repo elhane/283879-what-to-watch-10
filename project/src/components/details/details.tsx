@@ -1,7 +1,8 @@
 import { useAppSelector } from '../../hooks';
+import { getCurrentFilm } from '../../store/film-process/selectors';
 
 function Details(): JSX.Element {
-  const film = useAppSelector((state) => state.currentFilm);
+  const film = useAppSelector(getCurrentFilm);
 
   const {
     director,

@@ -5,11 +5,12 @@ import { useAppDispatch, useAppSelector } from '../../hooks';
 import { AppRoute } from '../../const';
 import { useEffect } from 'react';
 import { fetchCurrentFilmAction } from '../../store/api-actions';
+import { getCurrentFilm } from '../../store/film-process/selectors';
 
 function AddReviewScreen(): JSX.Element {
   const params = useParams();
   const dispatch = useAppDispatch();
-  const film = useAppSelector((state) => state.currentFilm);
+  const film = useAppSelector(getCurrentFilm);
 
   const {
     id,

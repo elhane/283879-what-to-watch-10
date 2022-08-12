@@ -1,12 +1,14 @@
 import './genre-tabs.css';
 import React from 'react';
 import { useAppDispatch, useAppSelector } from '../../hooks';
-import { resetCardsToShowAmount, setActiveGenre } from '../../store/action';
+import { resetCardsToShowAmount, setActiveGenre } from '../../store/film-process/film-process';
+import { getActiveGenre } from '../../store/film-process/selectors';
+import { getGenresList } from '../../store/films-data/selectors';
 
 function GenresTabs(): JSX.Element {
   const dispatch = useAppDispatch();
-  const selectedGenre = useAppSelector((state) => state.genre);
-  const genresList = useAppSelector((state) => state.genresList);
+  const selectedGenre = useAppSelector(getActiveGenre);
+  const genresList = useAppSelector(getGenresList);
 
   const onTabClickHandler = (evt: React.MouseEvent<HTMLButtonElement>) => {
     dispatch(setActiveGenre(evt.currentTarget.textContent));
