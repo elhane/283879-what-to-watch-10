@@ -1,41 +1,112 @@
-import { useEffect, useRef, useState } from 'react';
+import './video-player.css';
+import { ChangeEvent, useEffect, useRef, useState } from 'react';
+import PlayButton from './play-button/play-button';
+import FullScreenButton from './full-screen-button/full-screen-button';
+import PlayerProgress from './player-progress/player-progress';
+import LoadingScreen from '../../pages/loading-screen/loading-screen';
 
 type VideoPlayerProps = {
   src: string,
   isMute: boolean,
   videoPosterImage: string,
-  isShowVideo: boolean,
+  isShowTrailer: boolean,
   className?: string,
   hasControls?: boolean,
+  filmName?: string
 }
 
 function VideoPlayer(props: VideoPlayerProps): JSX.Element {
-  const { src, isMute, videoPosterImage, isShowVideo, className, hasControls = false } = props;
-  const [isPlaying, setIsPlaying] = useState(false);
+  const {
+    src,
+    filmName,
+    isMute,
+    videoPosterImage,
+    isShowTrailer,
+    className,
+    hasControls = false
+  } = props;
   const videoRef = useRef<HTMLVideoElement | null>(null);
+  const [videoPlayerState, setVideoPlayerState] = useState({
+    duration: 0,
+    progress: 0,
+    isPlaying: false,
+    isLoaded: false
+  });
+
+  const handlePlayAndPauseBtnClick = () => {
+    setVideoPlayerState({
+      ...videoPlayerState,
+      isPlaying: !videoPlayerState.isPlaying
+    });
+  };
+
+  const handleVideoLoaded = (filmDuration: number) => {
+    setVideoPlayerState({
+      ...videoPlayerState,
+      duration: filmDuration,
+      isLoaded: true
+    });
+  };
+
+  const handleTimeUpdate = () => {
+    if (videoRef.current !== null) {
+      const progress = (videoRef.current.currentTime / videoRef.current.duration) * 100;
+      const timeLeft = videoRef.current.duration - videoRef.current.currentTime;
+
+      setVideoPlayerState({
+        ...videoPlayerState,
+        progress,
+        duration: timeLeft
+      });
+    }
+  };
+
+  const handleVideoProgressChange = (evt: ChangeEvent<HTMLInputElement>) => {
+    if (videoRef.current) {
+      const newProgressValue = +evt.target.value;
+      videoRef.current.currentTime = (videoRef.current.duration / 100) * newProgressValue;
+
+      setVideoPlayerState({
+        ...videoPlayerState,
+        progress: newProgressValue
+      });
+    }
+  };
+
+  const handleFullScreenBtnClick = () => {
+    if (videoRef.current) {
+      videoRef.current?.requestFullscreen();
+    }
+  };
 
   useEffect(() => {
-    setIsPlaying(isShowVideo);
-  }, [isShowVideo]);
+    setVideoPlayerState({
+      ...videoPlayerState,
+      isPlaying: isShowTrailer
+    });
+  }, [isShowTrailer]);
 
   useEffect(() => {
     if (videoRef.current === null) {
       return;
     }
 
-    if (isPlaying) {
+    if (videoPlayerState.isPlaying) {
       videoRef.current.play();
-      return;
+    } else {
+      videoRef.current.pause();
+
+      if (!isShowTrailer) {
+        videoRef.current.currentTime = 0;
+        videoRef.current.load();
+      }
     }
 
-    videoRef.current.pause();
-    videoRef.current.currentTime = 0;
-    videoRef.current.load();
-
-  }, [isPlaying]);
+  }, [videoPlayerState.isPlaying]);
 
   return (
     <>
+      { !videoPlayerState.isLoaded ? <LoadingScreen /> : '' }
       <video
         height="175"
         src={ src }
@@ -43,34 +114,32 @@ function VideoPlayer(props: VideoPlayerProps): JSX.Element {
         poster={ videoPosterImage }
         ref={ videoRef }
         className={className}
+        onLoadedData={() => { if (videoRef.current?.duration) {
+          handleVideoLoaded(videoRef.current?.duration);
+        }}}
+        onTimeUpdate={ handleTimeUpdate }
       >
       </video>
 
       { hasControls ? (
         <div className="player__controls">
           <div className="player__controls-row">
-            <div className="player__time">
-              <progress className="player__progress" value="30" max="100"></progress>
-              <div className="player__toggler" style={{ left: '30%' }}>Toggler</div>
-            </div>
-            <div className="player__time-value">1:30:29</div>
+            <PlayerProgress
+              onVideoProgressChange={ handleVideoProgressChange }
+              videoProgress={ videoPlayerState.progress }
+              videoDuration={ videoPlayerState.duration }
+            />
           </div>
 
           <div className="player__controls-row">
-            <button type="button" className="player__play">
-              <svg viewBox="0 0 19 19" width="19" height="19">
-                <use xlinkHref="#play-s"></use>
-              </svg>
-              <span>Play</span>
-            </button>
-            <div className="player__name">Transpotting</div>
+            <PlayButton
+              isPaused={ !videoPlayerState.isPlaying }
+              onPlayAndPauseBtnClick={ handlePlayAndPauseBtnClick }
+            />
 
-            <button type="button" className="player__full-screen">
-              <svg viewBox="0 0 27 27" width="27" height="27">
-                <use xlinkHref="#full-screen"></use>
-              </svg>
-              <span>Full screen</span>
-            </button>
+            <div className="player__name">{ filmName }</div>
+
+            <FullScreenButton onFullScreenBtnClick={ handleFullScreenBtnClick }/>
           </div>
         </div>
       ) : ''}

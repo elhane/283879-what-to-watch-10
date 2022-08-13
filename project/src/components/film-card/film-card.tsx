@@ -12,19 +12,19 @@ type FilmCardProps = {
 
 function FilmCard(props: FilmCardProps): JSX.Element {
   const { id, previewImage, name, previewVideoLink } = props;
-  const [isShowVideo, setIsShowVideo] = useState(false);
+  const [isShowTrailer, setIsShowTrailer] = useState(false);
   const timerRef = useRef(0);
   const [isCardActive, setIsCardActive] = useState(false);
 
   const onMouseOverHandle = () => {
     setIsCardActive(true);
-    timerRef.current = window.setTimeout(() => setIsShowVideo(true),
+    timerRef.current = window.setTimeout(() => setIsShowTrailer(true),
       1000);
   };
 
   const onMouseOutHandle = () => {
     setIsCardActive(false);
-    setIsShowVideo(false);
+    setIsShowTrailer(false);
     clearTimeout(timerRef.current);
   };
 
@@ -39,7 +39,7 @@ function FilmCard(props: FilmCardProps): JSX.Element {
           <VideoPlayer
             src={ previewVideoLink }
             videoPosterImage={ previewImage }
-            isShowVideo={ isCardActive && isShowVideo }
+            isShowTrailer={ isCardActive && isShowTrailer }
             isMute
           />
         }

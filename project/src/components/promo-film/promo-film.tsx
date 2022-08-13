@@ -1,26 +1,27 @@
 import Header from '../header/header';
-import { useAppSelector } from '../../hooks';
+import {useAppDispatch, useAppSelector} from '../../hooks';
 import { useNavigate } from 'react-router-dom';
-import { getFavoritesList } from '../../store/film-process/selectors';
 import { getPromoFilm } from '../../store/promo-film-process/selectors';
 import LoadingScreen from '../../pages/loading-screen/loading-screen';
 import { getLoaderStatus } from '../../store/promo-film-process/selectors';
+import MyListButton from '../my-list-button/my-list-button';
+import { useEffect } from 'react';
+import { fetchFilmsFavoriteAction } from '../../store/api-actions';
 
 function PromoFilm(): JSX.Element {
-  const favoritesList = useAppSelector(getFavoritesList);
   const promoFilm = useAppSelector(getPromoFilm);
-  const navigate = useNavigate();
   const isShowLoader = useAppSelector(getLoaderStatus);
-
+  const navigate = useNavigate();
+  const dispatch = useAppDispatch();
   const { id, backgroundColor, backgroundImage, posterImage, name, genre, released } = promoFilm;
 
   const onPlayBtnClickHandler = () => {
     navigate(`/player/${id}`);
   };
 
-  const onMyListBtnClickHandler = () => {
-    //callback для добавления фильма в список?
-  };
+  useEffect(() => {
+    dispatch(fetchFilmsFavoriteAction());
+  }, [dispatch]);
 
   return (
     <>
@@ -54,12 +55,8 @@ function PromoFilm(): JSX.Element {
                   </svg>
                   <span>Play</span>
                 </button>
-                <button className="btn btn--list film-card__button" type="button" onClick={ onMyListBtnClickHandler }>
-                  <svg viewBox="0 0 19 20" width="19" height="20">
-                    <use xlinkHref="#add"></use>
-                  </svg>
-                  <span>My list</span> <span className="film-card__count">{ favoritesList.length }</span>
-                </button>
+
+                <MyListButton filmId={ id } />
               </div>
             </div>
           </div>

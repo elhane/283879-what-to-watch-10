@@ -16,7 +16,6 @@ function SimilarFilmsList({ filmId, films }: SimilarFilmsListProps): JSX.Element
         filteredFilms.map((film) => <FilmCard key={ film.id } { ...film }/>)
       }
     </>
-
   );
 }
 

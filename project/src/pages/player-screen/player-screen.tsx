@@ -9,7 +9,7 @@ function PlayerScreen(): JSX.Element {
   const params = useParams();
   const movies = useAppSelector(getFilms);
   const film = movies.find((movie) => movie.id === Number(params?.id)) as Film;
-  const { videoLink, previewImage, id } = film;
+  const { name, videoLink, previewImage, id } = film;
 
   const onExitBtnClickHandler = () => {
     navigate(`/films/${id}`);
@@ -17,10 +17,8 @@ function PlayerScreen(): JSX.Element {
 
   return (
     <div className="player">
-      <VideoPlayer src={videoLink} isMute videoPosterImage={previewImage} isShowVideo className={'player__video'} hasControls/>
-
+      <VideoPlayer src={ videoLink} filmName={ name } isMute videoPosterImage={ previewImage } isShowTrailer className={ 'player__video' } hasControls/>
       <button type="button" className="player__exit" onClick={ onExitBtnClickHandler }>Exit</button>
-
     </div>
   );
 }

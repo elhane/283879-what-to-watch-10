@@ -1,7 +1,12 @@
 import { createSlice } from '@reduxjs/toolkit';
 import { NameSpace, DEFAULT_FILM_GENRE, FILMS_PER_STEP_AMOUNT } from '../../const';
 import { FilmProcess } from '../../types/state';
-import { fetchCurrentFilmAction, fetchSimilarFilmsAction } from '../api-actions';
+import {
+  fetchCurrentFilmAction,
+  fetchSimilarFilmsAction,
+  fetchFilmsFavoriteAction,
+  postFilmFavoriteStatusAction
+} from '../api-actions';
 
 const initialState: FilmProcess = {
   genre: DEFAULT_FILM_GENRE,
@@ -72,6 +77,16 @@ export const filmProcess = createSlice({
       .addCase(fetchSimilarFilmsAction.rejected, (state) => {
         state.isShowLoader = false;
         state.isLoadingFailed = true;
+      })
+      .addCase(fetchFilmsFavoriteAction.pending, (state) => {
+        state.isShowLoader = true;
+      })
+      .addCase(fetchFilmsFavoriteAction.fulfilled, (state, action) => {
+        state.favoritesList = action.payload;
+        state.isShowLoader = false;
+      })
+      .addCase(postFilmFavoriteStatusAction.fulfilled, (state, action) => {
+        state.favoritesList = action.payload;
       });
   }
 });

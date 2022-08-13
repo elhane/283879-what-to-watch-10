@@ -117,3 +117,28 @@ export const fetchPromoFilmAction = createAsyncThunk<Film, string | undefined, {
     return data;
   },
 );
+
+export const fetchFilmsFavoriteAction = createAsyncThunk<Films, undefined, {
+  dispatch: AppDispatch,
+  state: State,
+  extra: AxiosInstance
+}>(
+  'data/fetchFilmsFavoriteAction',
+  async (_arg, {extra: api}) => {
+    const {data} = await api.get<Films>(APIRoute.Favorite);
+    return data;
+  },
+);
+
+export const postFilmFavoriteStatusAction = createAsyncThunk<Films, [number, number], {
+    dispatch: AppDispatch,
+    state: State,
+    extra: AxiosInstance
+}>(
+  'film/postFilmFavoriteStatus',
+  async ([filmId, filmStatus], {extra: api}) => {
+    await api.post(`${APIRoute.Favorite}/${filmId}/${filmStatus}`);
+    const {data} = await api.get<Films>(APIRoute.Favorite);
+    return data;
+  }
+);

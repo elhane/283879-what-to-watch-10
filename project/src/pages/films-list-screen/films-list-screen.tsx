@@ -1,8 +1,8 @@
 import Footer from '../../components/footer/footer';
 import Header from '../../components/header/header';
-import FilmsList from '../../components/films-list/films-list';
 import { useAppSelector } from '../../hooks';
 import { getFavoritesList } from '../../store/film-process/selectors';
+import MyListFilms from '../../components/my-list-films/my-list-films';
 
 function FilmsListScreen(): JSX.Element {
   const favoritesList = useAppSelector(getFavoritesList);
@@ -14,7 +14,7 @@ function FilmsListScreen(): JSX.Element {
       <section className="catalog">
         <h2 className="catalog__title visually-hidden">Catalog</h2>
 
-        <FilmsList />
+        <MyListFilms />
       </section>
 
       <Footer />

@@ -1,0 +1,24 @@
+.player__range {
+  -webkit-appearance: none;
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 100%;
+  background-color: transparent;
+}
+
+.player__range::-webkit-slider-thumb{
+  -webkit-appearance: none;
+  background: #D9CD8D;
+  height: 17px;
+  width: 17px;
+  border: none;
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+.player__range::-moz-range-thumb {
+  background: #D9CD8D;
+  border: none;
+  cursor: pointer;
+}

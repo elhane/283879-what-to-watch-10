@@ -24,7 +24,8 @@ export enum APIRoute {
   Login = '/login',
   Logout = '/logout',
   Comments = '/comments',
-  Promo = '/promo'
+  Promo = '/promo',
+  Favorite = '/favorite'
 }
 
 export const TIMEOUT_SHOW_ERROR = 3000;
@@ -45,3 +46,6 @@ export enum NameSpace {
   PromoFilm = 'PROMO_FILM',
   Reviews = 'REVIEWS',
 }
+
+export const ADD_FILM_IN_LIST = 1;
+export const DELETE_FILM_FROM_LIST = 0;
