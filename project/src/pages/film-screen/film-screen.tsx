@@ -9,21 +9,21 @@ import Tabs from '../../components/tabs/tabs';
 import {
   fetchCurrentFilmAction,
   fetchCommentsAction,
-  fetchSimilarFilmsAction
+  fetchSimilarFilmsAction,
+  fetchFilmsFavoriteAction
 } from '../../store/api-actions';
 import { useAppDispatch } from '../../hooks';
 import LoadingScreen from '../loading-screen/loading-screen';
 import {
   getCurrentFilm,
-  getFavoritesList,
   getSimilarFilms
 } from '../../store/film-process/selectors';
 import { getAuthorizationStatus} from '../../store/user-process/selectors';
 import { getLoaderStatus, getLoadingFailedStatus } from '../../store/film-process/selectors';
+import MyListButton from '../../components/my-list-button/my-list-button';
 
 function FilmScreen(): JSX.Element {
   const params = useParams();
-  const favoritesList = useAppSelector(getFavoritesList);
   const film = useAppSelector(getCurrentFilm);
   const similarFilms = useAppSelector(getSimilarFilms);
   const authorizationStatus = useAppSelector(getAuthorizationStatus);
@@ -47,10 +47,6 @@ function FilmScreen(): JSX.Element {
     navigate(`/player/${id}`);
   };
 
-  const onMyListBtnClickHandler = () => {
-    //callback для добавления фильма в список?
-  };
-
   useEffect(() => {
     if (isLoadingFailed) {
       navigate(AppRoute.NotFound);
@@ -61,6 +57,7 @@ function FilmScreen(): JSX.Element {
     dispatch(fetchCurrentFilmAction(params?.id));
     dispatch(fetchSimilarFilmsAction(params?.id));
     dispatch(fetchCommentsAction(params?.id));
+    dispatch(fetchFilmsFavoriteAction());
   }, [dispatch, params?.id]);
 
   return (
@@ -91,12 +88,7 @@ function FilmScreen(): JSX.Element {
                   <span>Play</span>
                 </button>
 
-                <button className="btn btn--list film-card__button" type="button">
-                  <svg viewBox="0 0 19 20" width="19" height="20" onClick={ onMyListBtnClickHandler }>
-                    <use xlinkHref="#add"></use>
-                  </svg>
-                  <span>My list</span> <span className="film-card__count">{ favoritesList.length }</span>
-                </button>
+                <MyListButton filmId={id} />
 
                 { authorizationStatus === AuthorizationStatus.Auth && <Link to={`/films/${id}/review`} className="btn film-card__button">Add review</Link> }
 
@@ -123,7 +115,11 @@ function FilmScreen(): JSX.Element {
           <h2 className="catalog__title">More like this</h2>
 
           <div className="catalog__films-list">
-            <SimilarFilmsList filmId={ id } films={ similarFilms }/>
+            {
+              similarFilms.length > 1 ?
+                <SimilarFilmsList filmId={ id } films={ similarFilms }/> :
+                <p>we did&apos;t find any similar films :(</p>
+            }
           </div>
         </section>
 
