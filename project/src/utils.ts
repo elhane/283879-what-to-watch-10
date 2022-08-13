@@ -17,3 +17,18 @@ export const formatDate = (dateString: string) => {
 
   return `${month} ${day}, ${year}`;
 };
+
+export const formatTime = (totalSeconds: number) => {
+  const hours = Math.floor(totalSeconds / 3600);
+  const totalSecondsRemains = totalSeconds % 3600;
+  const minutes = Math.floor(totalSecondsRemains / 60);
+  const seconds = Math.floor(totalSecondsRemains % 60);
+
+  const minutesString = String(minutes).padStart(2, '0');
+  const hoursString = String(hours).padStart(2, '0');
+  const secondsString = String(seconds).padStart(2, '0');
+
+  return totalSeconds > 3600 ?
+    `${hoursString}:${minutesString}:${secondsString}` :
+    `${minutesString}:${secondsString}`;
+};

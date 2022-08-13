@@ -83,6 +83,7 @@ export const filmProcess = createSlice({
       })
       .addCase(fetchFilmsFavoriteAction.fulfilled, (state, action) => {
         state.favoritesList = action.payload;
+        state.isShowLoader = false;
       })
       .addCase(postFilmFavoriteStatusAction.fulfilled, (state, action) => {
         state.favoritesList = action.payload;
