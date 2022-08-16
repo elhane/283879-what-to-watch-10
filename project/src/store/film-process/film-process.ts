@@ -47,6 +47,9 @@ export const filmProcess = createSlice({
     resetFilmCards: (state) => {
       state.cardsToShowAmount = FILMS_PER_STEP_AMOUNT;
       state.genre = DEFAULT_FILM_GENRE;
+    },
+    resetFilmsFavoritesList: (state) => {
+      state.favoritesList = [];
     }
   },
   extraReducers(builder) {
@@ -86,4 +89,4 @@ export const filmProcess = createSlice({
   }
 });
 
-export const { showMoreCards, resetCardsToShowAmount, setActiveGenre, resetFilmCards } = filmProcess.actions;
+export const { showMoreCards, resetCardsToShowAmount, setActiveGenre, resetFilmCards, resetFilmsFavoritesList } = filmProcess.actions;

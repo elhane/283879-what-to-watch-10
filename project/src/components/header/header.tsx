@@ -3,6 +3,7 @@ import { useAppDispatch, useAppSelector } from '../../hooks';
 import { logoutAction } from '../../store/api-actions';
 import { AppRoute, AuthorizationStatus } from '../../const';
 import { getAuthorizationStatus, getUserData } from '../../store/user-process/selectors';
+import { resetFilmsFavoritesList } from '../../store/film-process/film-process';
 import React from 'react';
 
 type breadcrumbsItem = {
@@ -35,6 +36,7 @@ function Header({
   const handleLogoutLinkClick = (evt: React.MouseEvent<HTMLAnchorElement>) => {
     evt.preventDefault();
     dispatch(logoutAction());
+    dispatch(resetFilmsFavoritesList());
   };
 
   return (
