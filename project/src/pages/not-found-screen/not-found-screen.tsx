@@ -1,6 +1,7 @@
 import Footer from '../../components/footer/footer';
 import Header from '../../components/header/header';
 import { Link } from 'react-router-dom';
+import './not-found-page.css';
 
 function NotFoundScreen(): JSX.Element {
   return (
@@ -8,9 +9,9 @@ function NotFoundScreen(): JSX.Element {
       <div className="page-content">
         <Header />
 
-        <div className="not-found-page__content" style={{ marginBottom: '40px', minHeight: 'calc(100vh - 336px)' }}>
-          <p style={{ textAlign: 'center' }}>404 - page not found</p>
-          <Link className="" to='/' style={{ textAlign: 'center', display: 'block', color: '#c9b37e' }}>
+        <div className="not-found-page__content">
+          <p className="not-found-page__text">404 - page not found</p>
+          <Link className="not-found-page__link" to='/'>
             Return to main page
           </Link>
         </div>

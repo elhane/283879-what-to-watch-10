@@ -1,4 +1,5 @@
 import { formatDate } from '../../utils';
+import './review.css';
 
 type ReviewProps = {
   comment: string,

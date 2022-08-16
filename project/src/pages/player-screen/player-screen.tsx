@@ -1,7 +1,7 @@
 import { useNavigate, useParams } from 'react-router-dom';
 import { useAppSelector } from '../../hooks';
 import { getFilms } from '../../store/films-data/selectors';
-import { Film} from '../../types/films';
+import { Film } from '../../types/films';
 import VideoPlayer from '../../components/video-player/video-player';
 
 function PlayerScreen(): JSX.Element {

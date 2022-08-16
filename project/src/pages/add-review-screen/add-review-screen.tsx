@@ -11,15 +11,14 @@ function AddReviewScreen(): JSX.Element {
   const params = useParams();
   const dispatch = useAppDispatch();
   const film = useAppSelector(getCurrentFilm);
-
-  const { id, name, posterImage, backgroundImage } = film;
+  const { id, name, posterImage, backgroundImage, backgroundColor } = film;
 
   useEffect(() => {
     dispatch(fetchCurrentFilmAction(params?.id));
   }, [dispatch, params?.id]);
 
   return (
-    <section className="film-card film-card--full">
+    <section className="film-card film-card--full" style={{ backgroundColor: backgroundColor }}>
       <div className="film-card__header">
         <div className="film-card__bg">
           <img src={ backgroundImage } alt={ name } />

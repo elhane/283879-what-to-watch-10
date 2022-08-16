@@ -7,6 +7,7 @@ import FormError from '../../components/form-error/form-error';
 import { CommentLength } from '../../const';
 import { getLoadingFailedStatus,getLoaderStatus } from '../../store/reviews-process/selectors';
 import LoadingScreen from '../../pages/loading-screen/loading-screen';
+import './review-form.css';
 
 function ReviewForm(): JSX.Element {
   const params = useParams();
@@ -15,14 +16,14 @@ function ReviewForm(): JSX.Element {
   const [ formData, setFormData ] = useState({ comment: '', rating: 0 });
   const [ formErrors, setFormErrors ] = useState({ comment: '', rating: '' });
   const [ formValid, setFormValid ] = useState(true);
-  const [ commentValid, setCommentValid ] = useState(true);
+  const [ commentValid, setCommentValid ] = useState(false);
   const [ ratingValid, setRatingValid ] = useState(true);
   const isLoadingFailed = useAppSelector(getLoadingFailedStatus);
   const isShowLoader = useAppSelector(getLoaderStatus);
 
   const validateTextarea = (value: string) => {
     switch (true) {
-      case value.length < CommentLength.Min:
+      case value.length < CommentLength.Min || value.length === 0:
         setFormErrors({ ...formErrors, comment: commentValid ? '' : 'too short, the comment must contain at least 50 characters' });
         setCommentValid(false);
         break;

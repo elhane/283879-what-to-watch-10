@@ -12,7 +12,7 @@ function MyListFilms(): JSX.Element {
   return (
     <>
       <div className={'catalog__films-list'}>
-        { favoritesList.length > 1 ?
+        { favoritesList.length > 0 ?
           filmsToShow.map((film) => <FilmCard key={ film.id } { ...film }/>)
           :
           <p className="catalog__films-empty-message">no films added to list yet</p>}
