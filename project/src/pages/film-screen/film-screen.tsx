@@ -6,7 +6,7 @@ import { useAppSelector } from '../../hooks';
 import { useEffect } from 'react';
 import { AppRoute, AuthorizationStatus } from '../../const';
 import Tabs from '../../components/tabs/tabs';
-import { fetchCurrentFilmAction, fetchCommentsAction, fetchSimilarFilmsAction, fetchFilmsFavoriteAction } from '../../store/api-actions';
+import { fetchCurrentFilmAction, fetchCommentsAction, fetchSimilarFilmsAction } from '../../store/api-actions';
 import { useAppDispatch } from '../../hooks';
 import LoadingScreen from '../loading-screen/loading-screen';
 import { getCurrentFilm, getSimilarFilms } from '../../store/film-process/selectors';
@@ -39,7 +39,6 @@ function FilmScreen(): JSX.Element {
     dispatch(fetchCurrentFilmAction(params?.id));
     dispatch(fetchSimilarFilmsAction(params?.id));
     dispatch(fetchCommentsAction(params?.id));
-    dispatch(fetchFilmsFavoriteAction());
   }, [dispatch, params?.id]);
 
   return (

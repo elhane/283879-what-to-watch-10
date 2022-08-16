@@ -1,9 +1,13 @@
 import { useAppDispatch, useAppSelector } from '../../hooks';
 import { getFavoritesList } from '../../store/film-process/selectors';
-import { postFilmFavoriteStatusAction } from '../../store/api-actions';
+import {
+  fetchFilmsFavoriteAction,
+  postFilmFavoriteStatusAction
+} from '../../store/api-actions';
 import { AppRoute, AuthorizationStatus, FavoritesListAction } from '../../const';
 import { getAuthorizationStatus } from '../../store/user-process/selectors';
 import { useNavigate } from 'react-router-dom';
+import { useEffect } from 'react';
 
 type MyListButtonProps = {
   filmId: number
@@ -23,6 +27,12 @@ function MyListButton({ filmId }: MyListButtonProps): JSX.Element {
       navigate(AppRoute.Login);
     }
   };
+
+  useEffect(() => {
+    if (authorizationStatus === AuthorizationStatus.Auth) {
+      dispatch(fetchFilmsFavoriteAction());
+    }
+  }, [dispatch, authorizationStatus]);
 
   return (
     <button className="btn btn--list film-card__button" type="button" onClick={ handleMyListButtonClick }>
