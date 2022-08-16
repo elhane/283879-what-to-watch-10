@@ -2,19 +2,27 @@ import { useEffect, useState } from 'react';
 
 type PlayButtonProps = {
   isPaused: boolean,
-  onPlayAndPauseBtnClick: () => void
+  onPlayAndPauseButtonClick: () => void
 }
 
-function PlayButton({isPaused, onPlayAndPauseBtnClick}: PlayButtonProps): JSX.Element {
-  const [isPlaying, setIsPlaying] = useState(false);
+function PlayButton({ isPaused, onPlayAndPauseButtonClick }: PlayButtonProps): JSX.Element {
+  const [ isPlaying, setIsPlaying ] = useState(false);
 
 
   useEffect(() => {
-    setIsPlaying(!isPaused);
+    let isMounted = true;
+
+    if (isMounted) {
+      setIsPlaying(!isPaused);
+    }
+
+    return () => {
+      isMounted = false;
+    };
   },[isPaused]);
 
   return (
-    <button type="button" className="player__play" onClick={ onPlayAndPauseBtnClick }>
+    <button type="button" className="player__play" onClick={ onPlayAndPauseButtonClick }>
       { !isPlaying ?
         (
           <>

@@ -1,7 +1,7 @@
 import Footer from '../../components/footer/footer';
 import GenresTabs from '../../components/genres-tabs/genres-tabs';
 import FilmsList from '../../components/films-list/films-list';
-import {useAppDispatch, useAppSelector} from '../../hooks';
+import { useAppDispatch, useAppSelector } from '../../hooks';
 import { useEffect } from 'react';
 import { fetchFilmsAction, fetchPromoFilmAction } from '../../store/api-actions';
 import PromoFilm from '../../components/promo-film/promo-film';

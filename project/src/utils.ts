@@ -4,9 +4,9 @@ export const isCheckedAuth = (authorizationStatus: AuthorizationStatus): boolean
   authorizationStatus === AuthorizationStatus.Unknown;
 
 export const formatMonth = (monthNumber: number): string => {
-  const monthArr = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+  const monthsList = [ 'January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December' ];
 
-  return monthArr[monthNumber];
+  return monthsList[monthNumber];
 };
 
 export const formatDate = (dateString: string) => {
@@ -32,3 +32,10 @@ export const formatTime = (totalSeconds: number) => {
     `${hoursString}:${minutesString}:${secondsString}` :
     `${minutesString}:${secondsString}`;
 };
+
+export const getTimeFromMinutes = (minutes: number): string => {
+  const hours = Math.trunc(minutes / 60);
+  const minutesRemains = minutes % 60;
+  return `${hours}h ${minutesRemains}m`;
+};
+

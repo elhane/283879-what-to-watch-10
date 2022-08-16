@@ -2,7 +2,9 @@ import { Link } from 'react-router-dom';
 import { useAppDispatch, useAppSelector } from '../../hooks';
 import { logoutAction } from '../../store/api-actions';
 import { AppRoute, AuthorizationStatus } from '../../const';
-import {getAuthorizationStatus, getUserData} from '../../store/user-process/selectors';
+import { getAuthorizationStatus, getUserData } from '../../store/user-process/selectors';
+import { resetFilmsFavoritesList } from '../../store/film-process/film-process';
+import React from 'react';
 
 type breadcrumbsItem = {
   title: string
@@ -30,6 +32,12 @@ function Header({
   const dispatch = useAppDispatch();
   const authorizationStatus = useAppSelector(getAuthorizationStatus);
   const userData = useAppSelector(getUserData);
+
+  const handleLogoutLinkClick = (evt: React.MouseEvent<HTMLAnchorElement>) => {
+    evt.preventDefault();
+    dispatch(logoutAction());
+    dispatch(resetFilmsFavoritesList());
+  };
 
   return (
     <header className={`page-header ${ extraClasses }`}>
@@ -76,10 +84,7 @@ function Header({
             <li className="user-block__item">
               <Link className="user-block__link"
                 to="/"
-                onClick={(evt) => {
-                  evt.preventDefault();
-                  dispatch(logoutAction());
-                }}
+                onClick={ handleLogoutLinkClick }
               >Sign out
               </Link>
             </li>

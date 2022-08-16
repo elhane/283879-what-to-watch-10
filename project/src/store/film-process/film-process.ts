@@ -1,12 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit';
 import { NameSpace, DEFAULT_FILM_GENRE, FILMS_PER_STEP_AMOUNT } from '../../const';
 import { FilmProcess } from '../../types/state';
-import {
-  fetchCurrentFilmAction,
-  fetchSimilarFilmsAction,
-  fetchFilmsFavoriteAction,
-  postFilmFavoriteStatusAction
-} from '../api-actions';
+import { fetchCurrentFilmAction, fetchSimilarFilmsAction, fetchFilmsFavoriteAction, postFilmFavoriteStatusAction } from '../api-actions';
 
 const initialState: FilmProcess = {
   genre: DEFAULT_FILM_GENRE,
@@ -52,6 +47,9 @@ export const filmProcess = createSlice({
     resetFilmCards: (state) => {
       state.cardsToShowAmount = FILMS_PER_STEP_AMOUNT;
       state.genre = DEFAULT_FILM_GENRE;
+    },
+    resetFilmsFavoritesList: (state) => {
+      state.favoritesList = [];
     }
   },
   extraReducers(builder) {
@@ -91,4 +89,4 @@ export const filmProcess = createSlice({
   }
 });
 
-export const { showMoreCards, resetCardsToShowAmount, setActiveGenre, resetFilmCards } = filmProcess.actions;
+export const { showMoreCards, resetCardsToShowAmount, setActiveGenre, resetFilmCards, resetFilmsFavoritesList } = filmProcess.actions;

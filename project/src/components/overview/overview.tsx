@@ -4,15 +4,9 @@ import { getCurrentFilm } from '../../store/film-process/selectors';
 function Overview(): JSX.Element {
   const film = useAppSelector(getCurrentFilm);
 
-  const {
-    description,
-    director,
-    starring,
-    rating,
-    scoresCount
-  } = film;
+  const { description, director, starring, rating, scoresCount } = film;
 
-  const getRatingText = (rate: number) => {
+  const getRatingTextFromNumber = (rate: number) => {
     switch(true) {
       case rate < 3:
         return 'Bad';
@@ -32,7 +26,7 @@ function Overview(): JSX.Element {
       <div className="film-rating">
         <div className="film-rating__score">{ rating }</div>
         <p className="film-rating__meta">
-          <span className="film-rating__level">{ getRatingText(rating) }</span>
+          <span className="film-rating__level">{ getRatingTextFromNumber(rating) }</span>
           <span className="film-rating__count">{ `${ scoresCount } ratings `}</span>
         </p>
       </div>

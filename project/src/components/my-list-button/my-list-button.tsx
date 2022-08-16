@@ -1,14 +1,13 @@
 import { useAppDispatch, useAppSelector } from '../../hooks';
 import { getFavoritesList } from '../../store/film-process/selectors';
-import { postFilmFavoriteStatusAction } from '../../store/api-actions';
 import {
-  ADD_FILM_IN_LIST,
-  AppRoute,
-  AuthorizationStatus,
-  DELETE_FILM_FROM_LIST
-} from '../../const';
+  fetchFilmsFavoriteAction,
+  postFilmFavoriteStatusAction
+} from '../../store/api-actions';
+import { AppRoute, AuthorizationStatus, FavoritesListAction } from '../../const';
 import { getAuthorizationStatus } from '../../store/user-process/selectors';
 import { useNavigate } from 'react-router-dom';
+import { useEffect } from 'react';
 
 type MyListButtonProps = {
   filmId: number
@@ -21,16 +20,22 @@ function MyListButton({ filmId }: MyListButtonProps): JSX.Element {
   const authorizationStatus = useAppSelector(getAuthorizationStatus);
   const navigate = useNavigate();
 
-  const handleMyListBtnClick = () => {
+  const handleMyListButtonClick = () => {
     if (authorizationStatus === AuthorizationStatus.Auth) {
-      dispatch(postFilmFavoriteStatusAction([filmId, isFilmInList ? DELETE_FILM_FROM_LIST : ADD_FILM_IN_LIST]));
+      dispatch(postFilmFavoriteStatusAction([filmId, isFilmInList ? FavoritesListAction.Delete : FavoritesListAction.Add]));
     } else {
       navigate(AppRoute.Login);
     }
   };
 
+  useEffect(() => {
+    if (authorizationStatus === AuthorizationStatus.Auth) {
+      dispatch(fetchFilmsFavoriteAction());
+    }
+  }, [dispatch, authorizationStatus]);
+
   return (
-    <button className="btn btn--list film-card__button" type="button" onClick={ handleMyListBtnClick }>
+    <button className="btn btn--list film-card__button" type="button" onClick={ handleMyListButtonClick }>
       {
         isFilmInList ? (
           <svg viewBox="0 0 18 14" width="18" height="14">
