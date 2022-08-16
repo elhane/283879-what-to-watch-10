@@ -18,7 +18,7 @@ function PlayerProgress({ onVideoProgressChange, videoDuration, videoProgress }:
           min="0"
           max="100"
           value={ videoProgress }
-          onChange={(evt) => onVideoProgressChange(evt)}
+          onChange={ (evt) => onVideoProgressChange(evt) }
         />
       </div>
       <div className="player__time-value">{ formatTime(videoDuration) }</div>

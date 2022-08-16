@@ -17,11 +17,11 @@ function FilmsList(): JSX.Element {
 
   useEffect(() => {
     dispatch(resetFilmCards());
-  }, []);
+  }, [dispatch]);
 
   return (
     <>
-      <div className={'catalog__films-list'}>
+      <div className={ 'catalog__films-list' }>
         {
           filmsToShow.map((film) => <FilmCard key={ film.id } { ...film }/>)
         }

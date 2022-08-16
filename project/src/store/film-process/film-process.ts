@@ -1,12 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit';
 import { NameSpace, DEFAULT_FILM_GENRE, FILMS_PER_STEP_AMOUNT } from '../../const';
 import { FilmProcess } from '../../types/state';
-import {
-  fetchCurrentFilmAction,
-  fetchSimilarFilmsAction,
-  fetchFilmsFavoriteAction,
-  postFilmFavoriteStatusAction
-} from '../api-actions';
+import { fetchCurrentFilmAction, fetchSimilarFilmsAction, fetchFilmsFavoriteAction, postFilmFavoriteStatusAction } from '../api-actions';
 
 const initialState: FilmProcess = {
   genre: DEFAULT_FILM_GENRE,

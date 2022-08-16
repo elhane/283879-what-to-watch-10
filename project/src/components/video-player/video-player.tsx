@@ -28,14 +28,14 @@ function VideoPlayer(props: VideoPlayerProps): JSX.Element {
     isPreview = false
   } = props;
   const videoRef = useRef<HTMLVideoElement | null>(null);
-  const [videoPlayerState, setVideoPlayerState] = useState({
+  const [ videoPlayerState, setVideoPlayerState ] = useState({
     duration: 0,
     progress: 0,
     isPlaying: false,
     isLoaded: false
   });
 
-  const handlePlayAndPauseBtnClick = () => {
+  const handlePlayAndPauseButtonClick = () => {
     setVideoPlayerState({
       ...videoPlayerState,
       isPlaying: !videoPlayerState.isPlaying
@@ -75,17 +75,25 @@ function VideoPlayer(props: VideoPlayerProps): JSX.Element {
     }
   };
 
-  const handleFullScreenBtnClick = () => {
+  const handleFullScreenButtonClick = () => {
     if (videoRef.current) {
       videoRef.current?.requestFullscreen();
     }
   };
 
   useEffect(() => {
-    setVideoPlayerState({
-      ...videoPlayerState,
-      isPlaying: isShowTrailer
-    });
+    let isMounted = true;
+
+    if (isMounted) {
+      setVideoPlayerState({
+        ...videoPlayerState,
+        isPlaying: isShowTrailer
+      });
+    }
+
+    return () => {
+      isMounted = false;
+    };
   }, [isShowTrailer]);
 
   useEffect(() => {
@@ -136,15 +144,15 @@ function VideoPlayer(props: VideoPlayerProps): JSX.Element {
           <div className="player__controls-row">
             <PlayButton
               isPaused={ !videoPlayerState.isPlaying }
-              onPlayAndPauseBtnClick={ handlePlayAndPauseBtnClick }
+              onPlayAndPauseButtonClick={ handlePlayAndPauseButtonClick }
             />
 
             <div className="player__name">{ filmName }</div>
 
-            <FullScreenButton onFullScreenBtnClick={ handleFullScreenBtnClick }/>
+            <FullScreenButton onFullScreenButtonClick={ handleFullScreenButtonClick }/>
           </div>
         </div>
-      ) : ''}
+      ) : '' }
     </>
 
   );

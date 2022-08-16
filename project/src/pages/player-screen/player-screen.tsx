@@ -1,4 +1,4 @@
-import {useNavigate, useParams} from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import { useAppSelector } from '../../hooks';
 import { getFilms } from '../../store/films-data/selectors';
 import { Film} from '../../types/films';
@@ -11,14 +11,14 @@ function PlayerScreen(): JSX.Element {
   const film = movies.find((movie) => movie.id === Number(params?.id)) as Film;
   const { name, videoLink, previewImage, id } = film;
 
-  const onExitBtnClickHandler = () => {
+  const handleExitButtonClick = () => {
     navigate(`/films/${id}`);
   };
 
   return (
     <div className="player">
       <VideoPlayer src={ videoLink} filmName={ name } isMute videoPosterImage={ previewImage } isShowTrailer className={ 'player__video' } hasControls/>
-      <button type="button" className="player__exit" onClick={ onExitBtnClickHandler }>Exit</button>
+      <button type="button" className="player__exit" onClick={ handleExitButtonClick }>Exit</button>
     </div>
   );
 }

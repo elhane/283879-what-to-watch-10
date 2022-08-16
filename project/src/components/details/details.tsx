@@ -1,22 +1,10 @@
 import { useAppSelector } from '../../hooks';
 import { getCurrentFilm } from '../../store/film-process/selectors';
+import { getTimeFromMinutes } from '../../utils';
 
 function Details(): JSX.Element {
   const film = useAppSelector(getCurrentFilm);
-
-  const {
-    director,
-    starring,
-    genre,
-    released,
-    runTime
-  } = film;
-
-  const getTimeFromMinutes = (mins: number): string => {
-    const hours = Math.trunc(mins / 60);
-    const minutes = mins % 60;
-    return `${hours}h ${minutes}m`;
-  };
+  const { director, starring, genre, released, runTime } = film;
 
   return (
     <div className="film-card__text film-card__row">

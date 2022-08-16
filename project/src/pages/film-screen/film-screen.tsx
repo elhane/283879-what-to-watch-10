@@ -6,18 +6,10 @@ import { useAppSelector } from '../../hooks';
 import { useEffect } from 'react';
 import { AppRoute, AuthorizationStatus } from '../../const';
 import Tabs from '../../components/tabs/tabs';
-import {
-  fetchCurrentFilmAction,
-  fetchCommentsAction,
-  fetchSimilarFilmsAction,
-  fetchFilmsFavoriteAction
-} from '../../store/api-actions';
+import { fetchCurrentFilmAction, fetchCommentsAction, fetchSimilarFilmsAction, fetchFilmsFavoriteAction } from '../../store/api-actions';
 import { useAppDispatch } from '../../hooks';
 import LoadingScreen from '../loading-screen/loading-screen';
-import {
-  getCurrentFilm,
-  getSimilarFilms
-} from '../../store/film-process/selectors';
+import { getCurrentFilm, getSimilarFilms } from '../../store/film-process/selectors';
 import { getAuthorizationStatus} from '../../store/user-process/selectors';
 import { getLoaderStatus, getLoadingFailedStatus } from '../../store/film-process/selectors';
 import MyListButton from '../../components/my-list-button/my-list-button';
@@ -29,21 +21,11 @@ function FilmScreen(): JSX.Element {
   const authorizationStatus = useAppSelector(getAuthorizationStatus);
   const isShowLoader = useAppSelector(getLoaderStatus);
   const isLoadingFailed = useAppSelector(getLoadingFailedStatus);
-
-  const {
-    id,
-    name,
-    genre,
-    posterImage,
-    released,
-    backgroundImage,
-    backgroundColor
-  } = film;
-
+  const { id, name, genre, posterImage, released, backgroundImage, backgroundColor} = film;
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
 
-  const onPlayBtnClickHandler = () => {
+  const handlePlayButtonClick = () => {
     navigate(`/player/${id}`);
   };
 
@@ -51,7 +33,7 @@ function FilmScreen(): JSX.Element {
     if (isLoadingFailed) {
       navigate(AppRoute.NotFound);
     }
-  }, [isLoadingFailed]);
+  }, [navigate, isLoadingFailed]);
 
   useEffect(() => {
     dispatch(fetchCurrentFilmAction(params?.id));
@@ -81,17 +63,16 @@ function FilmScreen(): JSX.Element {
               </p>
 
               <div className="film-card__buttons">
-                <button className="btn btn--play film-card__button" type="button" onClick={ onPlayBtnClickHandler }>
+                <button className="btn btn--play film-card__button" type="button" onClick={ handlePlayButtonClick }>
                   <svg viewBox="0 0 19 19" width="19" height="19">
                     <use xlinkHref="#play-s"></use>
                   </svg>
                   <span>Play</span>
                 </button>
 
-                <MyListButton filmId={id} />
+                <MyListButton filmId={ id } />
 
-                { authorizationStatus === AuthorizationStatus.Auth && <Link to={`/films/${id}/review`} className="btn film-card__button">Add review</Link> }
-
+                { authorizationStatus === AuthorizationStatus.Auth && <Link to={ `/films/${id}/review` } className="btn film-card__button">Add review</Link> }
               </div>
             </div>
           </div>

@@ -9,16 +9,6 @@ export enum AppRoute {
   NotFound = '/not_found'
 }
 
-export enum AuthorizationStatus {
-  Auth = 'AUTH',
-  NoAuth = 'NO_AUTH',
-  Unknown = 'UNKNOWN',
-}
-
-export const DEFAULT_FILM_GENRE = 'All genres';
-
-export const FILMS_PER_STEP_AMOUNT = 8;
-
 export enum APIRoute {
   Films = '/films',
   Login = '/login',
@@ -28,17 +18,6 @@ export enum APIRoute {
   Favorite = '/favorite'
 }
 
-export const TIMEOUT_SHOW_ERROR = 3000;
-
-export enum TabsNames {
-  Overview = 'Overview',
-  Details = 'Details',
-  Reviews = 'Reviews'
-}
-
-export const COMMENT_MIN_LENGTH = 50;
-export const COMMENT_MAX_LENGTH = 400;
-
 export enum NameSpace {
   User = 'USER',
   Data = 'DATA',
@@ -47,5 +26,32 @@ export enum NameSpace {
   Reviews = 'REVIEWS',
 }
 
-export const ADD_FILM_IN_LIST = 1;
-export const DELETE_FILM_FROM_LIST = 0;
+export enum AuthorizationStatus {
+  Auth = 'AUTH',
+  NoAuth = 'NO_AUTH',
+  Unknown = 'UNKNOWN',
+}
+
+export enum TabsName {
+  Overview = 'Overview',
+  Details = 'Details',
+  Reviews = 'Reviews'
+}
+
+export enum CommentLength {
+  Min = 50,
+  Max = 400
+}
+
+export enum FavoritesListAction {
+  Delete = 0,
+  Add = 1
+}
+
+export enum Timeout {
+  ShowError = 3000,
+  ShowTrailer = 1000
+}
+
+export const DEFAULT_FILM_GENRE = 'All genres';
+export const FILMS_PER_STEP_AMOUNT = 8;

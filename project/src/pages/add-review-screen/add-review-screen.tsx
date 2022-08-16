@@ -12,12 +12,7 @@ function AddReviewScreen(): JSX.Element {
   const dispatch = useAppDispatch();
   const film = useAppSelector(getCurrentFilm);
 
-  const {
-    id,
-    name,
-    posterImage,
-    backgroundImage
-  } = film;
+  const { id, name, posterImage, backgroundImage } = film;
 
   useEffect(() => {
     dispatch(fetchCurrentFilmAction(params?.id));

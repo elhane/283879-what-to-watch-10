@@ -5,6 +5,7 @@
   transform: translateY(-50%);
   width: 100%;
   background-color: transparent;
+  cursor: pointer;
 }
 
 .player__range::-webkit-slider-thumb{
@@ -21,4 +22,10 @@
   background: #D9CD8D;
   border: none;
   cursor: pointer;
+}
+
+video {
+  width: 100%;
+  object-fit: cover;
+  object-position: right;
 }
