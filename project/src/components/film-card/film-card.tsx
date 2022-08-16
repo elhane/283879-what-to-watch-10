@@ -41,6 +41,7 @@ function FilmCard(props: FilmCardProps): JSX.Element {
             videoPosterImage={ previewImage }
             isShowTrailer={ isCardActive && isShowTrailer }
             isMute
+            isPreview
           />
         }
         <h3 className="small-film-card__title">{ name }</h3>

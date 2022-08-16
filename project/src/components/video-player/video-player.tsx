@@ -12,7 +12,8 @@ type VideoPlayerProps = {
   isShowTrailer: boolean,
   className?: string,
   hasControls?: boolean,
-  filmName?: string
+  filmName?: string,
+  isPreview?: boolean
 }
 
 function VideoPlayer(props: VideoPlayerProps): JSX.Element {
@@ -21,9 +22,10 @@ function VideoPlayer(props: VideoPlayerProps): JSX.Element {
     filmName,
     isMute,
     videoPosterImage,
-    isShowTrailer,
+    isShowTrailer = false,
     className,
-    hasControls = false
+    hasControls = false,
+    isPreview = false
   } = props;
   const videoRef = useRef<HTMLVideoElement | null>(null);
   const [videoPlayerState, setVideoPlayerState] = useState({
@@ -102,11 +104,11 @@ function VideoPlayer(props: VideoPlayerProps): JSX.Element {
       }
     }
 
-  }, [videoPlayerState.isPlaying]);
+  }, [videoPlayerState.isPlaying, isShowTrailer]);
 
   return (
     <>
-      { !videoPlayerState.isLoaded ? <LoadingScreen /> : '' }
+      { !isPreview && !videoPlayerState.isLoaded ? <LoadingScreen /> : '' }
       <video
         height="175"
         src={ src }
