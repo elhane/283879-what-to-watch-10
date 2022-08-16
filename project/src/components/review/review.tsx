@@ -18,7 +18,7 @@ function Review({ comment, userName, date, rating }: ReviewProps):JSX.Element {
         </footer>
       </blockquote>
 
-      <div className="review__rating">{ rating }</div>
+      <div className="review__rating">{ rating.toFixed(1) }</div>
     </div>
   );
 }
