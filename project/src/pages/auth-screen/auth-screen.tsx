@@ -1,10 +1,13 @@
 import Footer from '../../components/footer/footer';
 import Header from '../../components/header/header';
 import { ChangeEvent, FormEvent, useEffect, useState } from 'react';
-import { useAppDispatch } from '../../hooks';
+import { useAppDispatch, useAppSelector } from '../../hooks';
 import { loginAction } from '../../store/api-actions';
 import './auth-screen.css';
 import FormError from '../../components/form-error/form-error';
+import { AppRoute, AuthorizationStatus } from '../../const';
+import { getAuthorizationStatus } from '../../store/user-process/selectors';
+import { useNavigate } from 'react-router-dom';
 
 function AuthScreen(): JSX.Element {
   const dispatch = useAppDispatch();
@@ -13,6 +16,8 @@ function AuthScreen(): JSX.Element {
   const [ formValid, setFormValid ] = useState(true);
   const [ loginValid, setLoginValid ] = useState(false);
   const [ passwordValid, setPasswordValid ] = useState(false);
+  const authorizationStatus = useAppSelector(getAuthorizationStatus);
+  const navigate = useNavigate();
 
   const validations = {
     email: /^([\w.%+-]+)@([\w-]+\.)+(\w{2,})$/i,
@@ -59,6 +64,12 @@ function AuthScreen(): JSX.Element {
       isMounted = false;
     };
   }, [ loginValid, passwordValid ]);
+
+  useEffect(() => {
+    if (authorizationStatus === AuthorizationStatus.Auth) {
+      navigate(AppRoute.Root);
+    }
+  }, [navigate, authorizationStatus]);
 
   return (
     <div className="user-page">
