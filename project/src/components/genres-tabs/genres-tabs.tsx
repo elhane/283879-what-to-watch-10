@@ -10,7 +10,7 @@ function GenresTabs(): JSX.Element {
   const selectedGenre = useAppSelector(getActiveGenre);
   const genresList = useAppSelector(getGenresList);
 
-  const onTabClickHandler = (evt: React.MouseEvent<HTMLButtonElement>) => {
+  const handleTabClick = (evt: React.MouseEvent<HTMLButtonElement>) => {
     dispatch(setActiveGenre(evt.currentTarget.textContent));
     dispatch(resetCardsToShowAmount());
   };
@@ -20,7 +20,7 @@ function GenresTabs(): JSX.Element {
       {
         genresList.map((tab) => (
           <li className={`catalog__genres-item ${ (selectedGenre === tab) ? 'catalog__genres-item--active' : ''}`} key={ tab }>
-            <button className="catalog__genres-link" onClick={ onTabClickHandler }>{ tab }</button>
+            <button className="catalog__genres-link" onClick={ handleTabClick }>{ tab }</button>
           </li>
         ))
       }

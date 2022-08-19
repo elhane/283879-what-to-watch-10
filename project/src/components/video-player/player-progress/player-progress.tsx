@@ -1,4 +1,4 @@
-import { formatTime } from '../../../utils';
+import { getFormattedTime } from '../../../utils';
 import { ChangeEvent } from 'react';
 
 type PlayerProgressProps = {
@@ -21,7 +21,7 @@ function PlayerProgress({ onVideoProgressChange, videoDuration, videoProgress }:
           onChange={ (evt) => onVideoProgressChange(evt) }
         />
       </div>
-      <div className="player__time-value">{ formatTime(videoDuration) }</div>
+      <div className="player__time-value">{ getFormattedTime(videoDuration) }</div>
     </>
   );
 }

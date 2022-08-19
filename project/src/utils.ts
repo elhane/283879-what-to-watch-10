@@ -3,22 +3,22 @@ import { AuthorizationStatus } from './const';
 export const isCheckedAuth = (authorizationStatus: AuthorizationStatus): boolean =>
   authorizationStatus === AuthorizationStatus.Unknown;
 
-export const formatMonth = (monthNumber: number): string => {
+export const getMonth = (monthNumber: number): string => {
   const monthsList = [ 'January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December' ];
 
   return monthsList[monthNumber];
 };
 
-export const formatDate = (dateString: string) => {
-  const commentDate = new Date(dateString);
-  const year = commentDate.getFullYear();
-  const day = commentDate.getDay();
-  const month = formatMonth(commentDate.getMonth());
+export const getFormattedDate = (dateString: string) => {
+  const getCommentDate = new Date(dateString);
+  const year = getCommentDate.getFullYear();
+  const day = getCommentDate.getDate();
+  const month = getMonth(getCommentDate.getMonth());
 
   return `${month} ${day}, ${year}`;
 };
 
-export const formatTime = (totalSeconds: number) => {
+export const getFormattedTime = (totalSeconds: number) => {
   const hours = Math.floor(totalSeconds / 3600);
   const totalSecondsRemains = totalSeconds % 3600;
   const minutes = Math.floor(totalSecondsRemains / 60);
