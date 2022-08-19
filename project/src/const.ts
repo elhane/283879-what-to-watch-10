@@ -74,8 +74,7 @@ export const Rating = {
     max: 10
   },
   Awesome: {
-    text:
-      'Awesome',
+    text: 'Awesome',
     min: 10
   }
 };
