@@ -1,5 +1,6 @@
 import { useAppSelector } from '../../hooks';
 import { getCurrentFilm } from '../../store/film-process/selectors';
+import { Rating } from '../../const';
 
 function Overview(): JSX.Element {
   const film = useAppSelector(getCurrentFilm);
@@ -8,16 +9,16 @@ function Overview(): JSX.Element {
 
   const getRatingTextFromNumber = (rate: number) => {
     switch(true) {
-      case rate < 3:
-        return 'Bad';
-      case rate >= 3 && rate < 5:
-        return 'Normal';
-      case rate >= 5 && rate < 8:
-        return 'Good';
-      case rate >= 8 && rate < 10:
-        return'Very good';
-      case rate === 10:
-        return 'Awesome';
+      case rate < Rating.Bad.max:
+        return Rating.Bad.text;
+      case rate >= Rating.Normal.min && rate < Rating.Normal.max:
+        return Rating.Normal.text;
+      case rate >= Rating.Good.min && rate < Rating.Good.max:
+        return Rating.Good.text;
+      case rate >= Rating.VeryGood.min && rate < Rating.VeryGood.max:
+        return Rating.VeryGood.text;
+      case rate === Rating.Awesome.min:
+        return Rating.Awesome.text;
     }
   };
 

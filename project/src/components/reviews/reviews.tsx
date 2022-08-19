@@ -5,12 +5,12 @@ import { getReviews } from '../../store/reviews-process/selectors';
 
 function Reviews(): JSX.Element {
   const reviews = useAppSelector(getReviews);
-  let firstCol: Comments = [];
-  let secondCol: Comments = [];
+  let firstColumnReviews: Comments = [];
+  let secondColumnReviews: Comments = [];
 
   if (reviews.length) {
-    firstCol = reviews.slice(0, Math.round(reviews.length / 2));
-    secondCol = reviews.slice(Math.round(reviews.length / 2), reviews.length);
+    firstColumnReviews = reviews.slice(0, Math.round(reviews.length / 2));
+    secondColumnReviews = reviews.slice(Math.round(reviews.length / 2), reviews.length);
   }
 
   return (
@@ -20,8 +20,8 @@ function Reviews(): JSX.Element {
         { !reviews.length ? <p className="film-card__text">No reviews</p> : ''}
 
         {
-          firstCol.length ? (
-            firstCol.map(({ id, comment, user, date, rating}) => (
+          firstColumnReviews.length ? (
+            firstColumnReviews.map(({ id, comment, user, date, rating}) => (
               <Review
                 key={ id }
                 comment={ comment }
@@ -36,8 +36,8 @@ function Reviews(): JSX.Element {
 
       <div className="film-card__reviews-col">
         {
-          secondCol.length ? (
-            secondCol.map(({ id, comment, user, date, rating}) => (
+          secondColumnReviews.length ? (
+            secondColumnReviews.map(({ id, comment, user, date, rating}) => (
               <Review
                 key={ id }
                 comment={ comment }

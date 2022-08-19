@@ -1,4 +1,4 @@
-import { formatDate } from '../../utils';
+import { getFormattedDate } from '../../utils';
 import './review.css';
 
 type ReviewProps = {
@@ -15,7 +15,7 @@ function Review({ comment, userName, date, rating }: ReviewProps):JSX.Element {
         <p className="review__text">{ comment }</p>
         <footer className="review__details">
           <cite className="review__author">{ userName }</cite>
-          <time className="review__date" dateTime={ date }>{ formatDate(date) }</time>
+          <time className="review__date" dateTime={ date }>{ getFormattedDate(date) }</time>
         </footer>
       </blockquote>
 

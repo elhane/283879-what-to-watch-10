@@ -53,5 +53,32 @@ export enum Timeout {
   ShowTrailer = 1000
 }
 
+export const Rating = {
+  Bad: {
+    text: 'Bad',
+    max: 3
+  },
+  Normal: {
+    text: 'Normal',
+    min: 3,
+    max: 5
+  },
+  Good: {
+    text: 'Good',
+    min: 5,
+    max: 8
+  },
+  VeryGood: {
+    text: 'Very Good',
+    min: 8,
+    max: 10
+  },
+  Awesome: {
+    text:
+      'Awesome',
+    min: 10
+  }
+};
+
 export const DEFAULT_FILM_GENRE = 'All genres';
 export const FILMS_PER_STEP_AMOUNT = 8;
