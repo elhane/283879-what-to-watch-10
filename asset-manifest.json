@@ -1,0 +1,13 @@
+{
+  "files": {
+    "main.css": "/what-to-watch/static/css/main.f9c1fef5.css",
+    "main.js": "/what-to-watch/static/js/main.455843d4.js",
+    "index.html": "/what-to-watch/index.html",
+    "main.f9c1fef5.css.map": "/what-to-watch/static/css/main.f9c1fef5.css.map",
+    "main.455843d4.js.map": "/what-to-watch/static/js/main.455843d4.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.f9c1fef5.css",
+    "static/js/main.455843d4.js"
+  ]
+}
