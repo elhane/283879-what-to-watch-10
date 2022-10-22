@@ -1,6 +1,6 @@
 # Личный проект «Что посмотреть»
 
-<img src="./WTW.gif" alt="My Project GIF" width="680" height="381">
+<img src="./WTW.gif" alt="My Project GIF" width="680" height="381" style="width: 100%; height: auto">
 
 ---
 
