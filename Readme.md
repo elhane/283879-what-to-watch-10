@@ -1,7 +1,7 @@
 # Личный проект «Что посмотреть»
 
 <div>
-    <img src="./wtw-project.gif" alt="My Project GIF" width="880" height="460" style="width: 100%; height: auto; pointer-events: none;">
+    <img src="./what-to-watch.png" alt="My Project GIF" width="880" height="667" style="width: 100%; height: auto; pointer-events: none;">
 </div>
 
 ### 👉 [view published version](https://elhane.github.io/what-to-watch/)
