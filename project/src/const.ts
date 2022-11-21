@@ -1,12 +1,12 @@
 export enum AppRoute {
-  Root = '/',
-  Login = '/login',
-  FilmsList = '/mylist',
-  Films = '/films/',
-  Film = '/films/:id',
-  AddReview = '/films/:id/review',
-  Player = '/player/:id',
-  NotFound = '/not_found'
+  Root = '/what-to-watch/',
+  Login = '/what-to-watch/login',
+  FilmsList = '/what-to-watch/mylist',
+  Films = '/what-to-watch/films/',
+  Film = '/what-to-watch/films/:id',
+  AddReview = '/what-to-watch/films/:id/review',
+  Player = '/what-to-watch/player/:id',
+  NotFound = '/what-to-watch/not_found'
 }
 
 export enum APIRoute {

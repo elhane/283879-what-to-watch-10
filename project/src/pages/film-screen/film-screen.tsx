@@ -26,7 +26,7 @@ function FilmScreen(): JSX.Element {
   const dispatch = useAppDispatch();
 
   const handlePlayButtonClick = () => {
-    navigate(`/player/${id}`);
+    navigate(`/what-to-watch/player/${id}`);
   };
 
   useEffect(() => {
@@ -71,7 +71,7 @@ function FilmScreen(): JSX.Element {
 
                 <MyListButton filmId={ id } />
 
-                { authorizationStatus === AuthorizationStatus.Auth && <Link to={ `/films/${id}/review` } className="btn film-card__button">Add review</Link> }
+                { authorizationStatus === AuthorizationStatus.Auth && <Link to={ `${AppRoute.Films}${id}/review` } className="btn film-card__button">Add review</Link> }
               </div>
             </div>
           </div>

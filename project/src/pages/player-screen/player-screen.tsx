@@ -3,6 +3,7 @@ import { useAppSelector } from '../../hooks';
 import { getFilms } from '../../store/films-data/selectors';
 import { Film } from '../../types/films';
 import VideoPlayer from '../../components/video-player/video-player';
+import {AppRoute} from '../../const';
 
 function PlayerScreen(): JSX.Element {
   const navigate = useNavigate();
@@ -12,7 +13,7 @@ function PlayerScreen(): JSX.Element {
   const { name, videoLink, previewImage, id } = film;
 
   const handleExitButtonClick = () => {
-    navigate(`/films/${id}`);
+    navigate(`${AppRoute.Films}${id}`);
   };
 
   return (

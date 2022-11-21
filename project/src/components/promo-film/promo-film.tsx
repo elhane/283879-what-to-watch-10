@@ -13,7 +13,7 @@ function PromoFilm(): JSX.Element {
   const { id, backgroundColor, backgroundImage, posterImage, name, genre, released } = promoFilm;
 
   const handlePlayButtonClick = () => {
-    navigate(`/player/${id}`);
+    navigate(`/what-to-watch/player/${id}`);
   };
 
   return (
