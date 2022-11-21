@@ -2,6 +2,7 @@ import Footer from '../../components/footer/footer';
 import Header from '../../components/header/header';
 import { Link } from 'react-router-dom';
 import './not-found-page.css';
+import {AppRoute} from '../../const';
 
 function NotFoundScreen(): JSX.Element {
   return (
@@ -11,7 +12,7 @@ function NotFoundScreen(): JSX.Element {
 
         <div className="not-found-page__content">
           <p className="not-found-page__text">404 - page not found</p>
-          <Link className="not-found-page__link" to='/'>
+          <Link className="not-found-page__link" to={AppRoute.Root}>
             Return to main page
           </Link>
         </div>

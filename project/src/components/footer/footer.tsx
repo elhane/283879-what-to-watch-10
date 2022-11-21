@@ -1,10 +1,12 @@
 import { Link } from 'react-router-dom';
+import { memo } from 'react';
+import { AppRoute } from '../../const';
 
 function Footer(): JSX.Element {
   return (
     <footer className="page-footer">
       <div className="logo">
-        <Link className="logo__link logo__link--light" to='/'>
+        <Link className="logo__link logo__link--light" to={AppRoute.Root}>
           <span className="logo__letter logo__letter--1">W</span>
           <span className="logo__letter logo__letter--2">T</span>
           <span className="logo__letter logo__letter--3">W</span>
@@ -18,4 +20,4 @@ function Footer(): JSX.Element {
   );
 }
 
-export default Footer;
+export default memo(Footer);

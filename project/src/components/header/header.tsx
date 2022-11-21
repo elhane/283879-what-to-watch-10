@@ -4,7 +4,7 @@ import { logoutAction } from '../../store/api-actions';
 import { AppRoute, AuthorizationStatus } from '../../const';
 import { getAuthorizationStatus, getUserData } from '../../store/user-process/selectors';
 import { resetFilmsFavoritesList } from '../../store/film-process/film-process';
-import React from 'react';
+import React, { memo } from 'react';
 
 type breadcrumbsItem = {
   title: string
@@ -100,4 +100,4 @@ function Header({
   );
 }
 
-export default Header;
+export default memo(Header);
