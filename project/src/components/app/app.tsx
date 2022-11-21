@@ -63,10 +63,6 @@ function App(): JSX.Element {
           path="*"
           element={ <NotFoundScreen /> }
         />
-        <Route
-          path="what-to-watch"
-          element={ <FirstScreen /> }
-        />
       </Routes>
     </HistoryRouter>
   );
